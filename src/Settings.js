@@ -95,7 +95,7 @@ class Settings extends React.Component {
             alert(
               `Subtitles: ${window.localStorage.getItem('subtitles') || 'default'
                 }\nAudio Track: ${window.localStorage.getItem('audio') || 'default'
-                }\n\nNote: This is a reacreaction of a DVD menu done in JavaScript with the source DVD menu as a background video hosted on youtube, adblockers may be required.`
+                }\n\nNote: This is a recreation of a DVD menu done in JavaScript with the source DVD menu as a background video hosted on youtube, adblockers may be required.`
             )
           }}>Settings</button>
           {window.location.pathname !== '/root' && (
