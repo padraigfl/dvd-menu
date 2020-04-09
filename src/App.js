@@ -90,17 +90,17 @@ class App extends Component {
       </div>
     );
 
-    if (/iPhone|iPod|iPad/.test(navigator.platform)) {
-      return (
-        <>
-        <p>
-          Sorry, iOS (and probably many mobile devices) keeps forcing videos to fullscreen so this doesn't work at all there yet.
-          Let me know if you can help at <a href="https://github.com/padraigfl">my github</a>.
-        </p>
-        {footer}
-        </>
-      );
-    }
+    // if (/iPhone|iPod|iPad/.test(navigator.platform) || window.innerWidth < 500) {
+    //   return (
+    //     <>
+    //     <p>
+    //       Sorry, iOS (and probably many mobile devices) keeps forcing videos to fullscreen so this doesn't work at all there yet.
+    //       Let me know if you can help at <a href="https://github.com/padraigfl">my github</a>.
+    //     </p>
+    //     {footer}
+    //     </>
+    //   );
+    // }
 
     return (
       <>
