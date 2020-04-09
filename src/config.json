@@ -1,0 +1,17 @@
+{
+  "defaultVideo": "V3airyA0Kig",
+  "type": "video/youtube",
+  "sourceDir": "https://youtube.com/embed/",
+  "poster": "https://images-na.ssl-images-amazon.com/images/I/518D7QGC3TL._AC_SY445_.jpg",
+  "scenesData": {
+    "count": 20,
+    "perPage": 4,
+    "styles": [
+      { "x": 200, "y": 400, "w": 60, "h": 40, "style": { "backgroundImage": "url(/static/highlights/scene-set.png)", "backgroundSize": "contain" }},
+      { "x": 260, "y": 400, "w": 60, "h": 40, "style": { "backgroundImage": "url(/static/highlights/scene-set.png)", "backgroundSize": "contain" }},
+      { "x": 322, "y": 400, "w": 80, "h": 40, "style": { "backgroundImage": "url(/static/highlights/scene-set.png)", "backgroundSize": "80px 40px" }},
+      { "x": 403, "y": 400, "w": 88, "h": 40, "style": { "backgroundImage": "url(/static/highlights/scene-set.png)", "backgroundSize": "88px 40px" }},
+      { "x": 490, "y": 400, "w": 100, "h": 40, "style": { "backgroundImage": "url(/static/highlights/scene-set.png)", "backgroundSize": "100px 40px" }}
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "name": "customized",
+  "version": "1.0.0",
+  "description": "A DVD Menu Styled Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jest",
+    "test:watch": "./node_modules/.bin/jest --watch",
+    "lint": "./node_modules/.bin/eslint src/ ",
+    "pretty-quick": "./node_modules/.bin/pretty-quick --staged",
+    "build": "webpack --mode production && cp -r static dist",
+    "start": "webpack-dev-server --open --mode development"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "npm run pretty-quick",
+      "npm run lint",
+      "git add"
+    ]
+  },
+  "precommit": "NODE_ENV=production ./node_modules/.bin/lint-staged",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.7.4",
+    "@reach/router": "^1.2.1",
+    "dotenv": "^8.2.0",
+    "linaria": "^1.3.1",
+    "nanoid": "^2.1.7",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-helmet": "^5.2.1",
+    "styled-components": "^4.4.1",
+    "videojs-react": "^0.1.9",
+    "videojs-youtube": "^2.6.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-react": "^7.7.4",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.6",
+    "core-js": "2.6.8",
+    "css-loader": "^3.2.0",
+    "dotenv-webpack": "^1.7.0",
+    "eslint": "^6.7.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.0.4",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "file-loader": "^5.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.9.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "prettier": "^1.19.1",
+    "react-test-renderer": "^16.12.0",
+    "url-loader": "^2.3.0",
+    "video.js": "^7.6.6",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  }
+}
