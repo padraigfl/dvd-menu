@@ -8,7 +8,7 @@
     "test:watch": "./node_modules/.bin/jest --watch",
     "lint": "./node_modules/.bin/eslint src/ ",
     "pretty-quick": "./node_modules/.bin/pretty-quick --staged",
-    "build": "webpack --mode production && cp -r static dist",
+    "build": "webpack --mode production && cp -r static dist && cp _redirects dist",
     "start": "webpack-dev-server --open --mode development"
   },
   "lint-staged": {
