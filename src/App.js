@@ -90,7 +90,7 @@ class App extends Component {
       </div>
     );
 
-    if (/iPhone|iPod|iPad/.test(navigator.platform) || window.innerWidth < 500) {
+    if (/iPhone|iPod|iPad/.test(navigator.platform)) {
       return (
         <>
         <p>
@@ -104,7 +104,7 @@ class App extends Component {
 
     return (
       <>
-        <div id="wrapper">
+        <div id="wrapper" style={ window.innerWidth < 500 ? { transform: `scale(${window.innerWidth / 853})`, transformOrigin: 'center left' } : undefined}>
           <Video
             launch={launch}
             config={debugConfig}
