@@ -198,6 +198,8 @@ class VideoHandler extends Component {
           poster={props.config.poster}
           setVideo={this.setVideo}
           autoPlay
+          allowfullscreen={false}
+          webkitallowfullscreen={false}
           playsInline="1" // youtube requires "1"
         />
         {
