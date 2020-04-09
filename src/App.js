@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import dataJson from "./data.single.json";
 import config from "./config.json";
-import { Router } from "@reach/router";
+import { Link, Router } from "@reach/router";
 import Menu from "./Menu";
 import Video from "./Video";
 import Settings from "./Settings";
@@ -29,7 +29,7 @@ const buildPageComponent = data => (props) => {
 const debugConfig = {
   defaultVideo: 'default2.mp4',
   type: 'video/youtube',
-  sourceDir: '/static/video/',
+  sourceDir: '/assets/video/',
   ...config,
 };
 
@@ -52,36 +52,37 @@ class App extends Component {
     }
 
     return (
-        <div id="wrapper">
-          <Video
-            launch={launch}
-            config={debugConfig}
-          >
-            {({ onLoad, startPageChange, getVideo, clearVideoListeners }) => {
-              return (
-                <Settings video={getVideo()} clearVideoListeners={clearVideoListeners}>
-                  <Router>
-                    {Object.entries(pageOptions).map(([link, data], idx) => {
-                      const Component = buildPageComponent({ ...data, scenesData: config.scenesData, pageName: `/${link}` });
-                      links.push(`/${link}`);
-                      return (
-                        <Component
-                          onLoad={onLoad}
-                          startPageChange={startPageChange}
-                          path={link}
-                          key={`r${idx}`}
-                        />
-                      );
-                    })}
-                  </Router>
-                </Settings>
-            )}}
-          </Video>
+      <>
+        <Video
+          launch={launch}
+          config={debugConfig}
+        >
+          {({ onLoad, startPageChange, getVideo, clearVideoListeners }) => {
+            return (
+              <Settings video={getVideo()} clearVideoListeners={clearVideoListeners}>
+                <Router>
+                  {Object.entries(pageOptions).map(([link, data], idx) => {
+                    const Component = buildPageComponent({ ...data, scenesData: config.scenesData, pageName: `/${link}` });
+                    links.push(`/${link}`);
+                    return (
+                      <Component
+                        onLoad={onLoad}
+                        startPageChange={startPageChange}
+                        path={link}
+                        key={`r${idx}`}
+                      />
+                    );
+                  })}
+                </Router>
+              </Settings>
+          )}}
+        </Video>
+
         {/* DEBUG: list of routes */}
         {/* {links.map(link => (
           <Link to={link}> {link}</Link>
         ))} */}
-        </div>
+      </>
     );
   }
 }

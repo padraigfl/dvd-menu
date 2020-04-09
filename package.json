@@ -24,6 +24,7 @@
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-syntax-dynamic-import": "^7.7.4",
     "@reach/router": "^1.2.1",
+    "acorn": "^7.1.1",
     "dotenv": "^8.2.0",
     "linaria": "^1.3.1",
     "nanoid": "^2.1.7",
