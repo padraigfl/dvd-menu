@@ -61,7 +61,7 @@ class App extends Component {
     const { launch, ...pageOptions } = dataJson;
     let links = [];
     const footer = (
-      <div className={marqueeStyles}>
+      <div className={marqueeStyles} style={{ maxHeight: '33vh', overflow: 'scroll' }}>
         Hi, this is a recreation of a DVD menu using the source menu file from the DVD. {' '}
         Most custom configuration is handled via JSON so the code could be used to make others. {' '}<br />
         Apologies for the video quality, I'm not very good at converting dvd menus to mp4
@@ -104,6 +104,7 @@ class App extends Component {
 
     return (
       <>
+        { footer }
         <div id="wrapper" style={ window.innerWidth < 500 ? { transform: `scale(${window.innerWidth / 853})`, transformOrigin: 'center left' } : undefined}>
           <Video
             launch={launch}
@@ -134,7 +135,6 @@ class App extends Component {
           <Link to={link}> {link}</Link>
         ))} */}
         </div>
-        {footer}
       </>
     );
   }
