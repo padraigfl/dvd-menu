@@ -66,6 +66,7 @@ class VideoPlayer extends React.Component {
 
     this.props.setVideo(this.player);
     this.iosIntervalHack = setInterval(() => {
+      console.log('applying interval hack');
       const iframe = document.querySelector('iframe#vid1_youtube_api');
       if (iframe) {
         iframe.setAttribute('webkit-allowfullscreen', '0');

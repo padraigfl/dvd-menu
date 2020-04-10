@@ -90,7 +90,7 @@ class Settings extends React.Component {
         },
         attachVideo,
       }}>
-        <Controls>
+        <Controls style={this.props.scale && this.state.initialized ? { transform: `scale(${1/this.props.scale})`, transformOrigin: 'top right' } : undefined }>
           <button onClick={() => {
             alert(
               `Subtitles: ${window.localStorage.getItem('subtitles') || 'default'

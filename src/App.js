@@ -101,18 +101,19 @@ class App extends Component {
     //     </>
     //   );
     // }
+    const scale = window.innerWidth < 853 ? window.innerWidth / 853 : undefined
 
     return (
       <>
         { footer }
-        <div id="wrapper" style={ window.innerWidth < 500 ? { transform: `scale(${window.innerWidth / 853})`, transformOrigin: 'center left' } : undefined}>
+        <div id="wrapper" style={ scale ? { transform: `scale(${scale})`, transformOrigin: 'center left' } : undefined}>
           <Video
             launch={launch}
             config={debugConfig}
           >
             {({ onLoad, startPageChange, getVideo, clearVideoListeners }) => {
               return (
-                <Settings video={getVideo()} clearVideoListeners={clearVideoListeners}>
+                <Settings video={getVideo()} clearVideoListeners={clearVideoListeners} scale={scale}>
                   <Router>
                     {Object.entries(pageOptions).map(([link, data], idx) => {
                       const Component = buildPageComponent({ ...data, scenesData: config.scenesData, pageName: `/${link}` });
