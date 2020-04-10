@@ -43,7 +43,10 @@ class VideoPlayer extends React.Component {
       this.player.dispose();
     }
     if (this.timer) {
-      removeInterval(this.timer);
+      clearInterval(this.timer);
+    }
+    if (this.iosIntervalHack) {
+      clearInterval(this.iosIntervalHack);
     }
   }
 
@@ -62,6 +65,18 @@ class VideoPlayer extends React.Component {
     this.player.playsinline(true);
 
     this.props.setVideo(this.player);
+    this.iosIntervalHack = setInterval(() => {
+      const iframe = document.querySelector('iframe#vid1_youtube_api');
+      if (iframe) {
+        iframe.setAttribute('webkit-allowfullscreen', '0');
+        iframe.setAttribute('allowfullscreen', '0');
+        iframe.setAttribute('webkit-playsinline', 'true');
+        iframe.setAttribute('playsinline', 'true');
+        if (this.iosIntervalHack) {
+          clearInterval(this.iosIntervalHack);
+        }
+      }
+    }, 2000);
   };
 
   render() {
