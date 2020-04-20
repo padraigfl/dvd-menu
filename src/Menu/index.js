@@ -79,8 +79,6 @@ const DefaultComponent = (props) =>  {
     }
   }, []);
 
-  console.log(props.active && props.pageName.match(/^\/scenes\/.*/) && props.scenesData && props.scenesData.scenes.length > props.scenesData.perPage);
-
   return props.active && (
     <MenuWrapper className={cx('defaultComponent', props.pageName)}>
       { Array.isArray(props.options) && props.options.length > 0  &&
@@ -95,7 +93,13 @@ const DefaultComponent = (props) =>  {
                     <li key={toggleValue}>
                       <input type="radio" value={toggleValue} id={toggleValue} checked={toggleValue === radioValues[option.key]} onChange={() => updateRadioValues(option.key, toggleValue)} />
                       <label htmlFor={toggleValue}>
-                        <Entry {...toggleDomAttrs} style={toggleStyles}>
+                        <Entry
+                          {...toggleDomAttrs}
+                          style={{
+                            ...props.defaultLinkStyle[entryProps.defaultStyleOption || 0],
+                            ...toggleStyles,
+                          }}
+                        >
                             {toggleValue}
                         </Entry>
                       </label>
@@ -109,7 +113,10 @@ const DefaultComponent = (props) =>  {
               <li key={option.link}>
                 <Entry
                   {...domAttrs}
-                  style={styles}
+                  style={{
+                    ...props.defaultLinkStyle[option.defaultStyleOption || 0],
+                    ...styles,
+                  }}
                   href={option.link}
                   onClick={
                     generateLink(
@@ -129,11 +136,12 @@ const DefaultComponent = (props) =>  {
           count={props.scenesData.scenes.length}
           index={props.index}
           styles={props.scenesData.navigation}
+          defaultLinkStyle={props.defaultLinkStyle}
         />
       )}
       { /* back and hidden */}
       <Helmet title={`Menu -- ${props.pageName}`} />
-      <ScreenSaver />
+      {/* <ScreenSaver /> */}
     </MenuWrapper>
   )
 };

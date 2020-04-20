@@ -1,12 +1,14 @@
 import React, { useRef, useCallback } from 'react';
-import { cx } from 'linaria';
+import { cx, css } from 'linaria';
 import { styled } from 'linaria/react';
 import { generateLink } from './utils';
 
-// @todo figure out how to apply tag dynamically
-const EntryLink = styled.a`
+const generalStyles = (type) => styled[type]`
   filter: grayscale(0);
+  display: inline-block;
+  opacity: 0.01;
   &:active, &:focus, &:hover {
+    opacity: 0.8;
     filter: ${props => (
       props.activeStyle && props.activeStyle.filter
         ? props.activeStyle.filter
@@ -15,8 +17,13 @@ const EntryLink = styled.a`
   }
 `;
 
+// @todo figure out how to apply tag dynamically
+const EntryLink = generalStyles('a');
+
+const EntryDiv = generalStyles('div');
+
 export const Entry = props => {
-  const Comp = props.link ? EntryLink : 'div';
+  const Comp = props.link ? EntryLink : EntryDiv;
   const ref = useRef();
   const { link, onClick, className, hidden, children, ...restProps } = props;
 

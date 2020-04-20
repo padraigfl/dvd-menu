@@ -2,7 +2,7 @@ import React from 'react';
 import { generateLink, processOption } from './utils';
 import Entry from './MenuEntry';
 
-const RangeSelection = ({ count, perPage, styles }) => {
+const RangeSelection = ({ count, perPage, styles, defaultLinkStyle = [{}],  }) => {
   console.log(count);
   console.log(styles)
   const iterations = Math.ceil(count/perPage);
@@ -15,12 +15,19 @@ const RangeSelection = ({ count, perPage, styles }) => {
       link,
       onClick: generateLink(link),
     })
+    console.log({
+      ...defaultLinkStyle[style.defaultStyleOption || 0],
+      style
+    });
     links.push(
       <li>
         <Entry
           {...domAttrs}
           href={link}
-          style={style}
+          style={{
+            ...defaultLinkStyle[styles[i % iterations].defaultStyleOption || 0],
+            ...style
+          }}
           key={link}
         />
       </li>

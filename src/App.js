@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import data from "./shrek.json";
+import data from "./matrix.json";
 import { Router } from "@reach/router";
 import Menu from "./Menu";
 import Video from "./Video";
@@ -94,7 +94,7 @@ class App extends Component {
   }
 
   render() {
-    const { pages, launch, scenes, ...config } = data; 
+    const { pages, launch, scenes, defaultLinkStyle = {}, ...config } = data; 
     const sceneData = buildScenesPages(scenes);
     const pageOptions = { ...pages, ...sceneData };
     let links = [];
@@ -128,7 +128,7 @@ class App extends Component {
                 <Settings video={getVideo()} clearVideoListeners={clearVideoListeners} scale={this.state.scale}>
                   <Router>
                     {Object.entries(pageOptions).map(([link, data], idx) => {
-                      const Component = buildPageComponent({ ...data, scenesData: scenes, pageName: `/${link}` });
+                      const Component = buildPageComponent({ ...data, defaultLinkStyle, scenesData: scenes, pageName: `/${link}` });
                       links.push(`/${link}`);
                       return (
                         <Component
