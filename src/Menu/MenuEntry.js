@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useMemo } from 'react';
 import { cx, css } from 'linaria';
 import { styled } from 'linaria/react';
 import { generateLink } from './utils';
@@ -39,8 +39,8 @@ export const Entry = props => {
       {...restProps}
       onMouseEnter={window.innerWidth > 800 ? onMouseEnter : undefined}
       ref={ref}
-      href={props.link}
-      onClick={generateLink(props.link, props.onClick)}
+      href={link}
+      onClick={generateLink(link, props.onClick)}
       className={cx('menuEntry', props.className)}
       title={children}
     />

@@ -2,6 +2,7 @@ import React, {
   useState,
   useEffect,
   useCallback,
+  useMemo,
   useRef,
 } from 'react';
 import { cx } from 'linaria';
@@ -52,6 +53,8 @@ const DefaultComponent = (props) =>  {
       {...acc, [key]: val || true }
     ), {});
 
+  const redirect = useMemo(() => props.redirect ? `${props.title}/${props.redirect}` : null, [props.title, props.redirect]);
+
   const [radioValues, setRadioState] = useState(getInitialValues(props.options));
   const updateRadioValues = React.useCallback((key, value) => {
     setRadioState({
@@ -68,7 +71,7 @@ const DefaultComponent = (props) =>  {
   useEffect(() => {
     props.onLoad({
       media: props.media,
-      redirect: props.redirect,
+      redirect: redirect,
       start: props.start || +queryStringObj.start,
       end: props.start + props.length,
       loadAction: setActive,
@@ -110,7 +113,7 @@ const DefaultComponent = (props) =>  {
             }
 
             return (
-              <li key={option.link}>
+              <li key={option.link || option.x + option.y}>
                 <Entry
                   {...domAttrs}
                   style={{
@@ -118,12 +121,6 @@ const DefaultComponent = (props) =>  {
                     ...styles,
                   }}
                   href={option.link}
-                  onClick={
-                    generateLink(
-                      option.link,
-                      option.onClick,
-                    )
-                  }
                 />
               </li>
             );
