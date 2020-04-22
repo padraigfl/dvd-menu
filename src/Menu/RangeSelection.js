@@ -2,14 +2,13 @@ import React from 'react';
 import { generateLink, processOption } from './utils';
 import Entry from './MenuEntry';
 
-const RangeSelection = ({ count, perPage, styles, defaultLinkStyle = [{}],  }) => {
-  console.log(count);
-  console.log(styles)
+const RangeSelection = ({ count, perPage, styles, defaultLinkStyle = [{}], title }) => {
   const iterations = Math.ceil(count/perPage);
   let i = 0;
   const links = [];
+  console.log(title);
   while (i < iterations) {
-    const link = `/scenes/${i}`;
+    const link = `/${title}/scenes/${i}`;
     const [style, domAttrs] = processOption({
       ...styles[i % iterations],
       link,
@@ -23,7 +22,7 @@ const RangeSelection = ({ count, perPage, styles, defaultLinkStyle = [{}],  }) =
       <li>
         <Entry
           {...domAttrs}
-          href={link}
+          link={link}
           style={{
             ...defaultLinkStyle[styles[i % iterations].defaultStyleOption || 0],
             ...style

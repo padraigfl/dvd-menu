@@ -53,8 +53,6 @@ const DefaultComponent = (props) =>  {
       {...acc, [key]: val || true }
     ), {});
 
-  const redirect = useMemo(() => props.redirect ? `${props.title}/${props.redirect}` : null, [props.title, props.redirect]);
-
   const [radioValues, setRadioState] = useState(getInitialValues(props.options));
   const updateRadioValues = React.useCallback((key, value) => {
     setRadioState({
@@ -71,7 +69,7 @@ const DefaultComponent = (props) =>  {
   useEffect(() => {
     props.onLoad({
       media: props.media,
-      redirect: redirect,
+      redirect: props.redirect,
       start: props.start || +queryStringObj.start,
       end: props.start + props.length,
       loadAction: setActive,
@@ -134,10 +132,11 @@ const DefaultComponent = (props) =>  {
           index={props.index}
           styles={props.scenesData.navigation}
           defaultLinkStyle={props.defaultLinkStyle}
+          title={props.title}
         />
       )}
       { /* back and hidden */}
-      <Helmet title={`Menu -- ${props.pageName}`} />
+      <Helmet title={`DVD: ${props.title} -- ${props.pageName}`} />
       {/* <ScreenSaver /> */}
     </MenuWrapper>
   )

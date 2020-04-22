@@ -3,7 +3,10 @@ import { cx, css } from 'linaria';
 import { styled } from 'linaria/react';
 import { generateLink } from './utils';
 
-const generalStyles = (type) => styled[type]`
+const generalStyles = (type) => styled[type]``;
+
+// @todo figure out how to apply tag dynamically
+const EntryLink = styled('a')`
   filter: grayscale(0);
   display: inline-block;
   opacity: 0.01;
@@ -17,10 +20,19 @@ const generalStyles = (type) => styled[type]`
   }
 `;
 
-// @todo figure out how to apply tag dynamically
-const EntryLink = generalStyles('a');
-
-const EntryDiv = generalStyles('div');
+const EntryDiv = styled('div')`
+  filter: grayscale(0);
+  display: inline-block;
+  opacity: 0.01;
+  &:active, &:focus, &:hover {
+    opacity: 0.8;
+    filter: ${props => (
+      props.activeStyle && props.activeStyle.filter
+        ? props.activeStyle.filter
+        : (props.styles && props.style.filter) || 'none'
+    )};
+  }
+`;
 
 export const Entry = props => {
   const Comp = props.link ? EntryLink : EntryDiv;
@@ -34,6 +46,7 @@ export const Entry = props => {
     }
   }, [props.hidden]);
 
+  
   return (
     <Comp
       {...restProps}

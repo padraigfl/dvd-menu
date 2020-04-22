@@ -11,6 +11,7 @@ const buildPageComponent = data => (props) => {
     media,
     index,
     options,
+    title,
     ...restData
   } = data;
   const [active, setActive] = useState(false);
@@ -18,16 +19,17 @@ const buildPageComponent = data => (props) => {
     options
       ? options.map((o) => ({
           ...o,
-          link: o.link ? `/${props.title}${o.link}` : undefined,
+          link: o.link ? `/${title}${o.link}` : undefined,
         }))
       : undefined,
-    [],
+    [props.options],
   );
-  debugger;
   return (
     <Component
       {...props}
       {...restData}
+      title={title}
+      redirect={data.redirect ? `/${title}${data.redirect}` : undefined}
       options={formattedOptions}
       media={Array.isArray(media) ? media[index] : media}
       active={active}
@@ -134,18 +136,16 @@ class DVD extends Component {
                 <Settings video={getVideo()} clearVideoListeners={clearVideoListeners} scale={this.state.scale}>
                   <Router>
                       {Object.entries(pageOptions).map(([link, data], idx) => {
-                        const Component = buildPageComponent({ ...data, defaultLinkStyle, scenesData: scenes, pageName: `/${link}` });
-                        links.push(`/${link}`);
+                        const Component = buildPageComponent({ ...data, title: config.title, defaultLinkStyle, scenesData: scenes, pageName: `/${link}` });
                         return (
                           <Component
                             onLoad={onLoad}
-                            path={link}
+                            path={`/${link}`}
                             key={`r${idx}`}
                             default={link === 'launch'}
                           />
                         );
                       })}
-                      
                   </Router>
                 </Settings>
             )}}
