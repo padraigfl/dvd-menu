@@ -114,13 +114,12 @@ class DVD extends Component {
     const pageOptions = { ...pages, ...sceneData };
     let links = [];
     return (
-      <>
         <div
           id="wrapper"
           ref={this.ref}
           className={config.title}
           style={
-            { transform: `scale(${this.state.scale})`, transformOrigin: 'center left' }
+            { transform: `scale(${this.state.scale}) translateY(-50%)`, transformOrigin: 'center left', marginTop: '50%' }
           }
         >
           <Video
@@ -155,8 +154,6 @@ class DVD extends Component {
           <Link to={link}> {link}</Link>
         ))} */}
         </div>
-        <Info />
-      </>
     );
   }
 }
