@@ -65,15 +65,24 @@ const debugConfig = {
 };
 
 class App extends Component {
-  state = {
-    initialLoadCompleted: false,
-  };
+  constructor(props) {
+    this.state = {
+      initialLoadCompleted: false,
+    };
+    this.ohDearItsIos = !/iPhone|iPod|iPad/.test(navigator.platform);
+  }
+
+  componentDidMount() {
+    let iOSNote = 'IOS_WARNING';
+    if (this.ohDearItsIos && !window.localStorage.getItem(iOSNote) && confirm('Warning: There will be video rendering issues on iOS')) {
+      window.localStorage.setItem(iOSNote, true);
+    }
+  }
 
   render() {
     const { pages, launch, scenes, ...config } = data; 
     const sceneData = buildScenesPages(scenes);
     const pageOptions = { ...pages, ...sceneData };
-    const ohDearItsIos = !/iPhone|iPod|iPad/.test(navigator.platform);
     let links = [];
     const footer = (
       <div className={marqueeStyles}>
@@ -104,10 +113,6 @@ class App extends Component {
         </p>
       </div>
     );
-
-    if (ohDearItsIos) {
-      alert('Video issues will occur on iOS, sorry.');
-    }
 
     return (
       <>

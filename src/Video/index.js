@@ -149,7 +149,7 @@ class VideoHandler extends Component {
     const vidData = this.props.launch[idx];
     if (!vidData) {
       if (this.video.src() !== this.defaultVidSource) {
-        this.video.src({ src:  this.defaultVidSource, type: this.getCorrectType() });
+        this.video.src({ src: this.defaultVidSource, type: this.getCorrectType() });
       }
 
       if (window.location.pathname === '/') {
@@ -157,7 +157,9 @@ class VideoHandler extends Component {
       }
       return;
     }
+
     const newVidSrc = `${this.props.config.sourceDir}${vidData.media}`;
+
     try {
       if (vidData.media && this.video.src() !== newVidSrc) {
         this.video.src({ src: newVidSrc, type: this.props.config.type });
