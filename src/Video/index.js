@@ -5,7 +5,9 @@ import Video from './Video';
 class VideoHandler extends Component {
   constructor(props) {
     super(props);
-    this.defaultVidSource = `${props.config.sourceDir}${props.config.defaultVideo}`;
+    this.defaultVidSource = props.needsBackup
+      ? props.config.backupLocalVideo
+      : `${props.config.sourceDir}${props.config.defaultVideo}`;
     this.state = {
       video: null,
     };
@@ -20,6 +22,13 @@ class VideoHandler extends Component {
 
   componentWillUnmount() {
     this.cleanup();
+  }
+
+  getCorrectType() {
+    if (this.props.needsBackup) {
+      return 'video/mp4';
+    }
+    return this.props.config.type;
   }
 
   /* TODO resolve startTime issues
@@ -68,7 +77,7 @@ class VideoHandler extends Component {
       && this.props.config
       && this.video.src() !== this.defaultVidSource
     ) {
-      this.video.src({ src: this.defaultVidSource, type: this.props.config.type  });
+      this.video.src({ src: this.defaultVidSource, type: this.getCorrectType()  });
     }
     // this.videoPause(startPoint);
 
@@ -140,7 +149,7 @@ class VideoHandler extends Component {
     const vidData = this.props.launch[idx];
     if (!vidData) {
       if (this.video.src() !== this.defaultVidSource) {
-        this.video.src({ src:  this.defaultVidSource, type: this.props.config.type });
+        this.video.src({ src:  this.defaultVidSource, type: this.getCorrectType() });
       }
 
       if (window.location.pathname === '/') {
@@ -153,7 +162,7 @@ class VideoHandler extends Component {
       if (vidData.media && this.video.src() !== newVidSrc) {
         this.video.src({ src: newVidSrc, type: this.props.config.type });
       } else if (!vidData.media && this.video.src() !== this.defaultVidSource) {
-        this.video.src({ src: this.defaultVidSource, type: this.props.config.type });
+        this.video.src({ src: this.defaultVidSource, type: this.getCorrectType() });
       }
       this.video.currentTime(vidData.start || 0);
       const endAction = () => this.runLaunchVideos(idx + 1)
@@ -191,7 +200,7 @@ class VideoHandler extends Component {
       <>
         <Video
           setup={{
-            sources: [{ src: this.defaultVidSource, type: this.props.config.type }],
+            sources: [{ src: this.defaultVidSource, type: this.getCorrectType() }],
             //sources: [{ src: 'https://www.youtube.com/watch?v=V3airyA0Kig', type: 'video/youtube' }],
             techOrder: ['html5', 'youtube'],
           }}

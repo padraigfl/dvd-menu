@@ -1,6 +1,5 @@
 import React, { Component, useState } from "react";
-import dataJson from "./data.single.json";
-import config from "./config.json";
+import data from "./shrek.json";
 import { css } from 'linaria';
 import { Router } from "@reach/router";
 import Menu from "./Menu";
@@ -33,7 +32,6 @@ const buildPageComponent = data => (props) => {
     ...restData
   } = data;
   const [active, setActive] = useState(false);
-  console.log(restData);
   return (
     <Component
       {...props}
@@ -45,11 +43,26 @@ const buildPageComponent = data => (props) => {
   );
 };
 
+const buildScenesPages = (scenes) => {
+  const scenePages = {};
+  const pageCount = Math.ceil(scenes.scenes.length / scenes.split);
+  for (let i = 0; i < pageCount; i++) {
+    scenePages[`scenes/${i}`] = {
+      options: [
+        ...scenes.scenes.slice(i * scenes.split, (i + 1) * scenes.split )
+          .map((v, idx) => ({ ...v, ...scenes.buttons[idx % scenes.buttons.length]})),
+        ...scenes.options,
+      ],
+      ...scenes.media[i % scenes.media.length],
+    };
+  }
+  return scenePages;
+};
+
 const debugConfig = {
   defaultVideo: 'default2.mp4',
   type: 'video/youtube',
   sourceDir: '/static/video/',
-  ...config,
 };
 
 class App extends Component {
@@ -58,7 +71,10 @@ class App extends Component {
   };
 
   render() {
-    const { launch, ...pageOptions } = dataJson;
+    const { pages, launch, scenes, ...config } = data; 
+    const sceneData = buildScenesPages(scenes);
+    const pageOptions = { ...pages, ...sceneData };
+    const ohDearItsIos = /iPhone|iPod|iPad/.test(navigator.platform);
     let links = [];
     const footer = (
       <div className={marqueeStyles}>
@@ -90,16 +106,8 @@ class App extends Component {
       </div>
     );
 
-    if (/iPhone|iPod|iPad/.test(navigator.platform)) {
-      return (
-        <>
-        <p>
-          Sorry, iOS (and probably many mobile devices) keeps forcing videos to fullscreen so this doesn't work at all there yet.
-          Let me know if you can help at <a href="https://github.com/padraigfl">my github</a>.
-        </p>
-        {footer}
-        </>
-      );
+    if (ohDearItsIos) {
+      alert('Video issues will occur on iOS, sorry.');
     }
 
     return (
@@ -108,14 +116,18 @@ class App extends Component {
         <div id="wrapper" style={ window.innerWidth < 500 ? { transform: `scale(${window.innerWidth / 853})`, transformOrigin: 'center left' } : undefined}>
           <Video
             launch={launch}
-            config={debugConfig}
+            config={{
+              ...debugConfig,
+              ...config,
+            }}
+            needsBackup={ohDearItsIos}
           >
             {({ onLoad, startPageChange, getVideo, clearVideoListeners }) => {
               return (
                 <Settings video={getVideo()} clearVideoListeners={clearVideoListeners}>
                   <Router>
                     {Object.entries(pageOptions).map(([link, data], idx) => {
-                      const Component = buildPageComponent({ ...data, scenesData: config.scenesData, pageName: `/${link}` });
+                      const Component = buildPageComponent({ ...data, scenesData: scenes, pageName: `/${link}` });
                       links.push(`/${link}`);
                       return (
                         <Component

@@ -120,12 +120,12 @@ const DefaultComponent = (props) =>  {
           })}
         </ul>
       }
-      { props.active && props.pageName.match(/^\/?scenes\/.*/) && props.scenesData && props.scenesData.count > props.scenesData.perPage && (
+      { props.active && props.pageName.match(/^\/?scenes\/.*/) && props.scenesData && props.scenesData.scenes.length > props.scenesData.split && (
         <RangeSelection
-          perPage={props.scenesData.perPage}
-          count={props.scenesData.count}
+          perPage={props.scenesData.split}
+          count={props.scenesData.scenes.length}
           index={props.index}
-          styles={props.scenesData.styles}
+          styles={props.scenesData.navigation}
         />
       )}
       { /* back and hidden */}
