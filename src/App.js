@@ -112,7 +112,7 @@ class App extends Component {
     return (
       <>
         {footer}
-        <div id="wrapper" style={ window.innerWidth < 500 ? { transform: `scale(${window.innerWidth / 853})`, transformOrigin: 'center left' } : undefined}>
+        <div id="wrapper" className={config.title} style={ window.innerWidth < 500 ? { transform: `scale(${window.innerWidth / 853})`, transformOrigin: 'center left' } : undefined}>
           <Video
             launch={launch}
             config={{
