@@ -8,6 +8,7 @@ const RangeSelection = ({ count, perPage, styles }) => {
   const links = [];
   while (i < iterations) {
     const link = `/scenes/${i}`;
+    console.log(styles);
     const [style, domAttrs] = processOption({
       ...styles[i % iterations],
       link,
