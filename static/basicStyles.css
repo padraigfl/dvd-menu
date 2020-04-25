@@ -54,3 +54,23 @@ input[type=radio] {
 ul {
   margin-top: 0px;
 }
+
+.shrek .menuEntry {
+  background-position: bottom center;
+  color: transparent;
+  display: inline-block;
+  opacity: 0;
+  background-image: url(/static/highlights/underline-fat.png);
+  filter: grayscale(1);
+  
+  /* for underlines */
+  background-size: auto 10px;
+  background-repeat: repeat-x;
+  background-repeat-y: no-repeat;
+  background-repeat-x: repeat;
+}
+
+.shrek .menuEntry:hover, .shrek .menuEntry:focus {
+  opacity: 0.8;
+  outline: none;
+}
