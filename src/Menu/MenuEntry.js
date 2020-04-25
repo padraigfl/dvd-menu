@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import { css, cx } from 'linaria';
 import { styled } from 'linaria/react';
 import { generateLink } from './utils';
@@ -19,8 +19,9 @@ const entryStyles = css`
   background-repeat-y: no-repeat;
   background-repeat-x: repeat;
 
-  &:active, &:focus, &:hover {
-    opacity: 0.5;
+  &:focus, &:hover {
+    opacity: 0.8;
+    outline: none;
   }
 `;
 
@@ -39,9 +40,21 @@ const EntryLink = styled.a`
 
 export const Entry = props => {
   const Comp = props.link ? EntryLink : 'div';
+  const ref = useRef();
+  const { link, onClick, className, hidden, ...restProps } = props;
+
+  const onMouseEnter = useCallback(() => {
+    ref.current.focus();
+    if (props.hidden) {
+      ref.current.blur();
+    }
+  }, [props.hidden]);
+
   return (
     <Comp
-      {...props}
+      {...restProps}
+      onMouseEnter={onMouseEnter}
+      ref={ref}
       href={props.link}
       onClick={generateLink(props.link, props.onClick)}
       className={cx(props.className, entryStyles)}

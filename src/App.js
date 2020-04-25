@@ -20,7 +20,6 @@ const marqueeStyles = css`
     height: 24px;
     filter: brightness(0);
     box-shadow: inset 0px -2px 0px 0px black;
-    opacity: 0.5;
   }
 `;
 
@@ -74,7 +73,7 @@ class App extends Component {
     const { pages, launch, scenes, ...config } = data; 
     const sceneData = buildScenesPages(scenes);
     const pageOptions = { ...pages, ...sceneData };
-    const ohDearItsIos = /iPhone|iPod|iPad/.test(navigator.platform);
+    const ohDearItsIos = !/iPhone|iPod|iPad/.test(navigator.platform);
     let links = [];
     const footer = (
       <div className={marqueeStyles}>

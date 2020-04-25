@@ -36,10 +36,14 @@
       { "link": "/play?t=1000", "children": "20" }
     ],
     "buttons": [
-      { "x": 0, "y": 0, "w": 0, "h": 0, "style": { "backgroundImage": "url", "backgroundSize": "", "backgroundPosition": "center", "backgroundRepeat": "no-repeat" } },
-      { "x": 0, "y": 0, "w": 0, "h": 0, "style": { "backgroundImage": "url", "backgroundSize": "", "backgroundPosition": "center", "backgroundRepeat": "no-repeat" } },
-      { "x": 0, "y": 0, "w": 0, "h": 0, "style": { "backgroundImage": "url", "backgroundSize": "", "backgroundPosition": "center", "backgroundRepeat": "no-repeat" } },
-      { "x": 0, "y": 0, "w": 0, "h": 0, "style": { "backgroundImage": "url", "backgroundSize": "", "backgroundPosition": "center", "backgroundRepeat": "no-repeat" } }
+      { "x": 130, "y": 175, "w": 180, "h": 140,
+        "style": { "backgroundImage": "url(/static/highlights/scene1.png)", "backgroundSize": "contain", "backgroundPosition": "center", "backgroundRepeat": "no-repeat" } },
+      { "x": 280, "y": 70, "w": 180, "h": 130,
+        "style": { "backgroundImage": "url(/static/highlights/scene2.png)", "backgroundSize": "contain", "backgroundPosition": "center", "backgroundRepeat": "no-repeat" } },
+      { "x": 410, "y": 235, "w": 180, "h": 130,
+        "style": { "backgroundImage": "url(/static/highlights/scene3.png)", "backgroundSize": "contain", "backgroundPosition": "center", "backgroundRepeat": "no-repeat" } },
+      { "x": 550, "y": 95, "w": 190, "h": 140,
+        "style": { "backgroundImage": "url(/static/highlights/scene4.png)", "backgroundSize": "contain", "backgroundPosition": "center", "backgroundRepeat": "no-repeat" } }
     ],
     "recurringStyles": {},
     "navigation": [
@@ -70,7 +74,7 @@
         { "link": "/features-transition", "children": "Special Features", "x": 350, "y": 385, "w": 120, "h": 55 },
         { "link": "/subtitles-transition", "children": "Subtitles", "x": 485, "y": 395, "w": 110, "h": 45 },
         { "link": "/audio-transition", "children": "Audio", "x": 610, "y": 395, "w": 80, "h": 45 },
-        { "link": "https://github.com/padraigfl", "children": "shameless self promotion", "x": 600, "y": 180, "w": 170, "h": 170,
+        { "link": "https://github.com/padraigfl", "hidden": true, "children": "shameless self promotion", "x": 600, "y": 180, "w": 170, "h": 170,
           "style": { "backgroundImage": "url(/static/highlights/github-icon.png", "backgroundSize": "cover", "backgroundRepeat":"no-repeat" }
         }
       ],
