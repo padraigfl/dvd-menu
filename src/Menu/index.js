@@ -106,6 +106,7 @@ const DefaultComponent = (props) =>  {
               <li key={option.link}>
                 <Entry
                   {...domAttrs}
+                  hidden={option.hidden}
                   style={styles}
                   href={option.link}
                   onClick={
