@@ -63,6 +63,8 @@
   },
   "pages": {
     "?": { "start": 0, "length": 7, "redirect": "/root" },
+
+    "launch": { "start": 0, "length": 7, "redirect": "/root" },
     "root": {
       "options": [
         {
