@@ -30,7 +30,7 @@ export const Entry = props => {
   return (
     <Comp
       {...restProps}
-      onMouseEnter={onMouseEnter}
+      onMouseEnter={window.innerWidth > 800 ? onMouseEnter : undefined}
       ref={ref}
       href={props.link}
       onClick={generateLink(props.link, props.onClick)}

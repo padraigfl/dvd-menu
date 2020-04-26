@@ -189,9 +189,10 @@ class VideoHandler extends Component {
     this.setState({ video });
     video.muted(true);
     video.controls(true);
-    if (this.props.launch && window.location.pathname === '/') {
-      this.runLaunchVideos(0);
-    }
+    video.play();
+    // if (this.props.launch && window.location.pathname === '/') {
+    //   this.runLaunchVideos(0);
+    // }
   }
 
   getVideo = () => this.video;

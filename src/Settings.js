@@ -98,9 +98,7 @@ class Settings extends React.Component {
                 }\n\nNote: This is a recreation of a DVD menu done in JavaScript with the source DVD menu as a background video hosted on youtube, adblockers may be required.`
             )
           }}>Settings</button>
-          {window.location.pathname !== '/root' && (
-              <button type="button" onClick={() => navigate('/root')}>Home</button>
-          )}
+          <button type="button" onClick={() => navigate('/root')} disabled={window.location.pathname === '/root'}>Home</button>
           { this.state.initialized ? (
             <>
               {/* <button

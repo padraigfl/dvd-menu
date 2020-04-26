@@ -22,7 +22,10 @@ iframe {
   display: flex;
   flex-direction: column;
   align-content: center;
-  min-height: calc(100vh - var(--iOSHeading));
+  /* https://twitter.com/AllThingsSmitty/status/1254151507412496384 */
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  height: -webkit-fill-available;
 }
 
 #wrapper {
