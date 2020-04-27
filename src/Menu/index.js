@@ -2,6 +2,7 @@ import React, {
   useState,
   useEffect,
   useCallback,
+  useRef,
 } from 'react';
 import { cx } from 'linaria';
 import { styled } from 'linaria/react';
@@ -9,6 +10,7 @@ import { processOption, generateLink } from './utils';
 import Entry from './MenuEntry';
 import RangeSelection from './RangeSelection';
 import Helmet from 'react-helmet';
+import ScreenSaver from './ScreenSaver';
 
 const MenuWrapper = styled.div`
   height:480px;
@@ -43,19 +45,26 @@ const getInitialValues = (options = []) => {
 }
 
 const DefaultComponent = (props) =>  {
-  // const [ styles ] = useState(props.style ? css`${props.style}` : null);
-  const [radioValues, setRadioState] = useState(getInitialValues(props.options));
-  const { onLoad, startPageChange } = props;
-  const setActive = useCallback(() => props.setActive(true), []);
   const queryStringObj = window.location.search
     .split('&')
     .map(v => v.split('='))
     .reduce((acc, [key, val]) => (
       {...acc, [key]: val || true }
     ), {});
+
+  const [radioValues, setRadioState] = useState(getInitialValues(props.options));
+  const updateRadioValues = React.useCallback((key, value) => {
+    setRadioState({
+      ...radioValues,
+      [key]: value,
+    });
+    storeRadioValue(key, value);
+  }, [setRadioState, radioValues, storeRadioValue]);
+
+  const setActive = useCallback(() => props.setActive(true), []);
+
   useEffect(() => {
-    console.log(props);
-    onLoad({
+    props.onLoad({
       media: props.media,
       redirect: props.redirect,
       start: props.start || +queryStringObj.start,
@@ -64,18 +73,10 @@ const DefaultComponent = (props) =>  {
       controls: props.controls,
     });
     return () => {
-      startPageChange();
+      props.startPageChange();
       props.setActive(false);
     }
   }, []);
-
-  const updateRadioValues = React.useCallback((key, value) => {
-    setRadioState({
-      ...radioValues,
-      [key]: value,
-    });
-    storeRadioValue(key, value);
-  }, [setRadioState, radioValues, storeRadioValue]);
 
   return props.active && (
     <MenuWrapper className={cx('defaultComponent', props.pageName)}>
@@ -129,6 +130,7 @@ const DefaultComponent = (props) =>  {
       )}
       { /* back and hidden */}
       <Helmet title={`Menu -- ${props.pageName}`} />
+      <ScreenSaver />
     </MenuWrapper>
   )
 };

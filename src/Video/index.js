@@ -70,12 +70,17 @@ class VideoHandler extends Component {
     ) {
       this.video.src({ src: this.defaultVidSource, type: this.props.config.type  });
     }
-
     // this.videoPause(startPoint);
 
-    // this.video.pause();
+
+    if (!redirect) {
+      this.video.one('pause', () => {
+          this.video.play();
+      });
+    };
 
     this.video.play().then(() => {
+      this.video.play();
       this.video.currentTime(startPoint);
       if (loadAction) {
         loadAction();
@@ -193,8 +198,7 @@ class VideoHandler extends Component {
           poster={props.config.poster}
           setVideo={this.setVideo}
           autoPlay
-          playsInline
-          playsinline
+          playsInline="1" // youtube requires "1"
         />
         {
           this.props.children({ startPageChange, onLoad, getVideo, clearVideoListeners: cleanup })
