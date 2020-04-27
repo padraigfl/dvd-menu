@@ -1,8 +1,8 @@
 import { styled } from 'linaria/react';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 
-const loopTime = 250;
-const increment = 20;
+const loopTime = 20;
+const increment = 4;
 
 const ScreenSaverBody = styled.div`
   position: absolute;
@@ -13,7 +13,6 @@ const ScreenSaverBody = styled.div`
   overflow: hidden;
   background-color: black;
   img {
-    transition: all linear ${loopTime}ms;
     width: 240px;
   }
 `;
@@ -66,7 +65,6 @@ const ScreenSaverView = () => {
 
   useEffect(() => {
     requestAnimationFrame(updatePosition);
-    return () => { start.current = -1; };
   }, []);
 
   return (
