@@ -3,7 +3,10 @@
   "defaultVideo": "V3airyA0Kig",
   "type": "video/youtube",
   "sourceDir": "https://youtube.com/embed/",
-  "backupLocalVideo": "/static/video/_smallMenu.mp4",
+  "backupLocalVideo": [
+    "/static/video/_smallMenu.mp4",
+    "https://github.com/padraigfl/dvd-menu/blob/format-update/static/video/_smallMenu.mp4?raw=true"
+  ],
   "poster": "https://images-na.ssl-images-amazon.com/images/I/518D7QGC3TL._AC_SY445_.jpg",
   "launch": [{ "start": 0, "length": 7 }],
   "scenes": {

@@ -5,10 +5,12 @@ import Video from './Video';
 class VideoHandler extends Component {
   constructor(props) {
     super(props);
+    this.baseVideo = `${props.config.sourceDir}${props.config.defaultVideo}`;
     this.defaultVidSource = props.needsBackup
-      ? props.config.backupLocalVideo
-      : `${props.config.sourceDir}${props.config.defaultVideo}`;
+      ? props.config.backupLocalVideo[0]
+      : baseVideo;
     this.state = {
+      needsBackup: props.needsBackup,
       video: null,
     };
   }
@@ -19,16 +21,55 @@ class VideoHandler extends Component {
   video;
   pauseTime;
   audio = true;
+  attempts = 0;
 
   componentWillUnmount() {
     this.cleanup();
   }
 
-  getCorrectType() {
-    if (this.props.needsBackup) {
-      return 'video/mp4';
+  setSource = (source) => {
+    if (source === this.video.src()) {
+      return;
     }
-    return this.props.config.type;
+    const src = source || this.defaultVidSource;
+    const type = sourceType || (this.state.needsBackup ? 'video/mp4' : this.props.config.type)
+    this.video.src({ src, type  });
+  }
+
+  errorHandler = (...args, startTime, redirect) => {
+    if (this.attempts > 5 && this.video.src() === this.baseVideo) {
+      this.setState({ needsBackup: true });
+      this.defaultVidSource = this.props.config.backupLocalVideo[0];
+    }
+    if (attempts > 10 && confirm(
+      `The video has failed to load, please click OK to refresh and try again. If you are on iOS, please try on a computer.`
+    )) {
+      if (!redirect) {
+        window.location.reload();
+      } else {
+        window.location.replace(redirect);
+      }
+    } else if ([this.baseVideo, ...this.props.config.backupLocalVideo].includes(this.video.src())) {
+      this.setSource(this.props.config.backupLocalVideo[attempts % this.props.config.backupLocalVideo]);
+      setTimeout(() => this.videoPlay({ startTime, redirect }))
+    }
+    attempts++;
+  }
+
+  videoPlay = ({
+    callBack = () => {},
+    errorHandler = this.errorHandler,
+    startTime = 0,
+    redirect,
+  }) => {
+    this.video.play()
+      .then((...args) => {
+        this.video.currentTime(startTime);
+        callBack(...args);
+      })
+      .catch((...args) => {
+        errorHandler(...args, startTime, redirect);
+      });
   }
 
   /* TODO resolve startTime issues
@@ -49,7 +90,7 @@ class VideoHandler extends Component {
       ? () => navigate(redirect, { replace: true })
       : () => {
         this.video.currentTime(startPoint);
-        this.video.play();
+        this.videoPlay();
       }
     this.video.one('play', () => {
       if (this.pauseListener) {
@@ -65,42 +106,42 @@ class VideoHandler extends Component {
 
     this.setOnFinishAction(onFinish);  
 
-    if (media && `${this.props.config.sourceDir}${media}` !== this.video.src()) {
-      this.video.src({ src: `${this.props.config.sourceDir}${media}`, type: this.props.config.type });
+    if (media) {
+      this.setSource(`${this.props.config.sourceDir}${media}`);
       if (this.pauseListener) {
         clearInterval(this.pauseListener);
       }
       this.video.controls(true);
       return;
-    } else if (
-      !media
-      && this.props.config
-      && this.video.src() !== this.defaultVidSource
-    ) {
-      this.video.src({ src: this.defaultVidSource, type: this.getCorrectType()  });
+    } else {
+      this.setSource(this.defaultVidSource);
     }
     // this.videoPause(startPoint);
 
 
     if (!redirect) {
       this.video.one('pause', () => {
-          this.video.play();
+        this.videoPlay();
       });
     };
 
-    this.video.play().then(() => {
-      this.video.play();
-      this.video.currentTime(startPoint);
-      if (loadAction) {
-        loadAction();
-      }
-      if (end) {
-        this.loopListener = setInterval(() => {
-          if (this.video.currentTime() >= end) {
-            onFinish();
-          }
-        }, 100);
-      }
+    this.videoPlay({
+      callback: () => {
+        this.videoPlay();
+        this.video.currentTime(startPoint);
+        if (loadAction) {
+          loadAction();
+        }
+        if (end) {
+          this.loopListener = setInterval(() => {
+            if (this.video.currentTime() >= end) {
+              onFinish();
+            }
+          }, 100);
+        }
+      },
+      startTime: startPoint,
+      redirect,
     });
   }
 
@@ -139,49 +180,46 @@ class VideoHandler extends Component {
     this.endAction = action;
   }
 
-  // mimic staggered freeze on selecting an option in menu
-  startPageChange = () => {
-    // this.videoPause();
-  }
+  // TODO: easier to do this just as a load of single pages
+  // runLaunchVideos = (idx) => {
+  //   this.cleanup();
+  //   const vidData = this.props.launch[idx];
+  //   if (!vidData) {
+  //     if (this.video.src() !== this.defaultVidSource) {
+  //       this.video.src({ src: this.defaultVidSource, type: this.getCorrectType() });
+  //     }
 
-  runLaunchVideos = (idx) => {
-    this.cleanup();
-    const vidData = this.props.launch[idx];
-    if (!vidData) {
-      if (this.video.src() !== this.defaultVidSource) {
-        this.video.src({ src: this.defaultVidSource, type: this.getCorrectType() });
-      }
+  //     if (window.location.pathname === '/') {
+  //       navigate('/root');
+  //     }
+  //     return;
+  //   }
 
-      if (window.location.pathname === '/') {
-        navigate('/root');
-      }
-      return;
-    }
+  //   const newVidSrc = `${this.props.config.sourceDir}${vidData.media}`;
 
-    const newVidSrc = `${this.props.config.sourceDir}${vidData.media}`;
+  //   try {
+  //     if (vidData.media && this.video.src() !== newVidSrc) {
+  //       this.video.src({ src: newVidSrc, type: this.props.config.type });
+  //     } else if (!vidData.media && this.video.src() !== this.defaultVidSource) {
+  //       this.video.src({ src: this.defaultVidSource, type: this.getCorrectType() });
+  //     }
+  //     this.video.currentTime(vidData.start || 0);
+  //     const endAction = () => this.runLaunchVideos(idx + 1)
 
-    try {
-      if (vidData.media && this.video.src() !== newVidSrc) {
-        this.video.src({ src: newVidSrc, type: this.props.config.type });
-      } else if (!vidData.media && this.video.src() !== this.defaultVidSource) {
-        this.video.src({ src: this.defaultVidSource, type: this.getCorrectType() });
-      }
-      this.video.currentTime(vidData.start || 0);
-      const endAction = () => this.runLaunchVideos(idx + 1)
-      this.video.play().then(() => {
-        this.video.on('ended',  endAction);
-        if (vidData.length) {
-          this.loopListener = setInterval(() => {
-            if (this.video.currentTime() > ((vidData.start || 0) + vidData.length)) {
-              endAction();
-            }
-          }, 100);
-        }
-      });
-    } catch {
-      this.runLaunchVideos(idx + 1);
-    }
-  }
+  //     this.videoPlay(() => {
+  //       this.video.on('ended', endAction);
+  //       if (vidData.length) {
+  //         this.loopListener = setInterval(() => {
+  //           if (this.video.currentTime() > ((vidData.start || 0) + vidData.length)) {
+  //             endAction();
+  //           }
+  //         }, 100);
+  //       }
+  //     });
+  //   } catch {
+  //     this.runLaunchVideos(idx + 1);
+  //   }
+  // }
 
   setVideo = (video) => {
     window.vid = video;
@@ -189,7 +227,7 @@ class VideoHandler extends Component {
     this.setState({ video });
     video.muted(true);
     video.controls(true);
-    video.play();
+    this.videoPlay();
     // if (this.props.launch && window.location.pathname === '/') {
     //   this.runLaunchVideos(0);
     // }
