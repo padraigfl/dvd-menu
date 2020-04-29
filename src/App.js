@@ -115,7 +115,7 @@ class App extends Component {
             }}
             needsBackup={this.ohDearItsIos}
           >
-            {({ onLoad, startPageChange, getVideo, clearVideoListeners }) => {
+            {({ onLoad, getVideo, clearVideoListeners }) => {
               return (
                 <Settings video={getVideo()} clearVideoListeners={clearVideoListeners}>
                   <Router>
@@ -125,7 +125,6 @@ class App extends Component {
                       return (
                         <Component
                           onLoad={onLoad}
-                          startPageChange={startPageChange}
                           path={link}
                           key={`r${idx}`}
                           default={link === 'launch'}

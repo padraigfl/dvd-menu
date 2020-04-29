@@ -8,7 +8,7 @@ class VideoHandler extends Component {
     this.baseVideo = `${props.config.sourceDir}${props.config.defaultVideo}`;
     this.defaultVidSource = props.needsBackup
       ? props.config.backupLocalVideo[0]
-      : baseVideo;
+      : this.baseVideo;
     this.state = {
       needsBackup: props.needsBackup,
       video: null,
@@ -27,48 +27,61 @@ class VideoHandler extends Component {
     this.cleanup();
   }
 
-  setSource = (source) => {
+  getCorrectType = () => this.state.needsBackup ? 'video/mp4' : this.props.config.type;
+
+  setSource = (source, sourceType) => {
     if (source === this.video.src()) {
       return;
     }
     const src = source || this.defaultVidSource;
-    const type = sourceType || (this.state.needsBackup ? 'video/mp4' : this.props.config.type)
-    this.video.src({ src, type  });
+    const type = sourceType || this.getCorrectType();
+    this.video.src({ src, type });
   }
 
-  errorHandler = (...args, startTime, redirect) => {
+  errorHandler = (startTime, redirect) => {
     if (this.attempts > 5 && this.video.src() === this.baseVideo) {
       this.setState({ needsBackup: true });
       this.defaultVidSource = this.props.config.backupLocalVideo[0];
     }
-    if (attempts > 10 && confirm(
-      `The video has failed to load, please click OK to refresh and try again. If you are on iOS, please try on a computer.`
-    )) {
-      if (!redirect) {
+    if (this.attempts > 10){
+      const retry = confirm(
+        `The video has failed to load, please click OK to refresh and try again. If you are on iOS, please try on a computer.`
+      );
+      if (!retry) {
+        return;
+      } else if (!redirect) {
         window.location.reload();
       } else {
-        window.location.replace(redirect);
+        navigate(redirect, { replace: true });
       }
     } else if ([this.baseVideo, ...this.props.config.backupLocalVideo].includes(this.video.src())) {
-      this.setSource(this.props.config.backupLocalVideo[attempts % this.props.config.backupLocalVideo]);
-      setTimeout(() => this.videoPlay({ startTime, redirect }))
+      this.setSource(this.props.config.backupLocalVideo[this.attempts % this.props.config.backupLocalVideo]);
+      setTimeout(() => this.videoPlay({ startTime, redirect }), 500 * (attempts + 1));
     }
-    attempts++;
+    this.attempts++;
   }
 
-  videoPlay = ({
-    callBack = () => {},
-    errorHandler = this.errorHandler,
-    startTime = 0,
-    redirect,
-  }) => {
+  videoPlay = (playData = {}) => {
+    const {
+      callback,
+      errorHandler = this.errorHandler,
+      startTime = 0,
+      redirect,
+    } = playData;
     this.video.play()
       .then((...args) => {
         this.video.currentTime(startTime);
-        callBack(...args);
+        this.video.play();
+        if (callback) {
+          callback(...args);
+        }
       })
       .catch((...args) => {
-        errorHandler(...args, startTime, redirect);
+        if (typeof errorHandler === 'undefined') {
+          this.errorHandler(startTime, redirect);
+        } else {
+          errorHandler(...args);
+        }
       });
   }
 
@@ -107,7 +120,7 @@ class VideoHandler extends Component {
     this.setOnFinishAction(onFinish);  
 
     if (media) {
-      this.setSource(`${this.props.config.sourceDir}${media}`);
+      this.setSource(`${this.props.config.sourceDir}${media}`, this.props.config.type);
       if (this.pauseListener) {
         clearInterval(this.pauseListener);
       }
@@ -117,29 +130,32 @@ class VideoHandler extends Component {
       this.setSource(this.defaultVidSource);
     }
     // this.videoPause(startPoint);
+  
+    const callback = () => {
+      // this.videoPlay();
+      this.video.currentTime(startPoint);
+      if (loadAction) {
+        loadAction(true);
+      }
+      this.attempts = 0;
+      if (end) {
+        this.loopListener = setInterval(() => {
+          if (this.video.currentTime() >= end) {
+            onFinish();
+          }
+        }, 10);
+      }
+    };
 
 
     if (!redirect) {
       this.video.one('pause', () => {
-        this.videoPlay();
+        this.videoPlay({ callback, startTime: start });
       });
     };
 
     this.videoPlay({
-      callback: () => {
-        this.videoPlay();
-        this.video.currentTime(startPoint);
-        if (loadAction) {
-          loadAction();
-        }
-        if (end) {
-          this.loopListener = setInterval(() => {
-            if (this.video.currentTime() >= end) {
-              onFinish();
-            }
-          }, 100);
-        }
-      },
+      callback,
       startTime: startPoint,
       redirect,
     });

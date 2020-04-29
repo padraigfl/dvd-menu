@@ -36,7 +36,6 @@ iframe {
   background-color: rgba(0,0,0,0.2);
   z-index: 2;
   margin-top: auto;
-  transform: translateY(calc(var(--iOSHeading) / 2))
 }
 
 input[type=radio] {

@@ -61,7 +61,9 @@ const DefaultComponent = (props) =>  {
     storeRadioValue(key, value);
   }, [setRadioState, radioValues, storeRadioValue]);
 
-  const setActive = useCallback(() => props.setActive(true), []);
+  const setActive = useCallback(() => {
+    props.setActive(true)
+  }, []);
 
   useEffect(() => {
     props.onLoad({
@@ -73,7 +75,6 @@ const DefaultComponent = (props) =>  {
       controls: props.controls,
     });
     return () => {
-      props.startPageChange();
       props.setActive(false);
     }
   }, []);
@@ -106,7 +107,6 @@ const DefaultComponent = (props) =>  {
               <li key={option.link}>
                 <Entry
                   {...domAttrs}
-                  hidden={option.hidden}
                   style={styles}
                   href={option.link}
                   onClick={
@@ -121,12 +121,12 @@ const DefaultComponent = (props) =>  {
           })}
         </ul>
       }
-      { props.active && props.pageName.match(/^\/?scenes\/.*/) && props.scenesData && props.scenesData.scenes.length > props.scenesData.split && (
+      { props.active && props.pageName.match(/^\/?scenes\/.*/) && props.scenesData && props.scenesData.count > props.scenesData.perPage && (
         <RangeSelection
-          perPage={props.scenesData.split}
-          count={props.scenesData.scenes.length}
+          perPage={props.scenesData.perPage}
+          count={props.scenesData.count}
           index={props.index}
-          styles={props.scenesData.navigation}
+          styles={props.scenesData.styles}
         />
       )}
       { /* back and hidden */}
