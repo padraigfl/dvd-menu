@@ -5,7 +5,7 @@ import { styled } from 'linaria/react';
 const marqueeStyles = css`
   position: fixed;
   width: 100vw;
-  max-height: 90vh;
+  max-height: 80vh;
   bottom: 0px;
   left: 0px;
   display: flex;

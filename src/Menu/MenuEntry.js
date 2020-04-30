@@ -18,7 +18,7 @@ const EntryLink = styled.a`
 export const Entry = props => {
   const Comp = props.link ? EntryLink : 'div';
   const ref = useRef();
-  const { link, onClick, className, hidden, ...restProps } = props;
+  const { link, onClick, className, hidden, children, ...restProps } = props;
 
   const onMouseEnter = useCallback(() => {
     ref.current.focus();
@@ -35,6 +35,7 @@ export const Entry = props => {
       href={props.link}
       onClick={generateLink(props.link, props.onClick)}
       className={cx('menuEntry', props.className)}
+      title={children}
     />
   );
 }

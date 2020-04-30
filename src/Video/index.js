@@ -44,19 +44,19 @@ class VideoHandler extends Component {
       this.defaultVidSource = this.props.config.backupLocalVideo[0];
     }
     if (this.attempts > 10){
+      if (redirect) {
+        window.location.replace(redirect);
+        return;
+      }
       const retry = confirm(
         `The video has failed to load, please click OK to refresh and try again. If you are on iOS, please try on a computer.`
       );
-      if (!retry) {
-        return;
-      } else if (!redirect) {
+      if (retry) {
         window.location.reload();
-      } else {
-        navigate(redirect, { replace: true });
       }
     } else if ([this.baseVideo, ...this.props.config.backupLocalVideo].includes(this.video.src())) {
       this.setSource(this.props.config.backupLocalVideo[this.attempts % this.props.config.backupLocalVideo]);
-      setTimeout(() => this.videoPlay({ startTime, redirect }), 500 * (attempts + 1));
+      setTimeout(() => this.videoPlay({ startTime, redirect }), 500 * (this.attempts + 1));
     }
     this.attempts++;
   }
@@ -103,7 +103,7 @@ class VideoHandler extends Component {
       ? () => navigate(redirect, { replace: true })
       : () => {
         this.video.currentTime(startPoint);
-        this.videoPlay();
+        this.videoPlay({ startTime: startPoint });
       }
     this.video.one('play', () => {
       if (this.pauseListener) {
@@ -125,6 +125,7 @@ class VideoHandler extends Component {
         clearInterval(this.pauseListener);
       }
       this.video.controls(true);
+      setTimeout(this.video.play, 2000);
       return;
     } else {
       this.setSource(this.defaultVidSource);

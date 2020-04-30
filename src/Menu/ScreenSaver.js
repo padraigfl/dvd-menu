@@ -17,6 +17,8 @@ const ScreenSaverBody = styled.div`
   }
 `;
 
+const hueRotate = (val) => `hue-rotate(${(val * 50) % 360}deg)`
+
 const formatTranslate = ({ x, y }) => `translate(${x}px, ${y}px)`
 
 const ScreenSaverView = () => {
@@ -26,19 +28,24 @@ const ScreenSaverView = () => {
   const xDir = useRef(increment);
   const yDir = useRef(increment);
   const start = useRef(null);
+  const hits = useRef(0);
 
   const updateDirection = useCallback(() => {
     const logo = logoEl.current.getBoundingClientRect();
     const wrapper = wrapperEl.current.getBoundingClientRect();
     if (xDir.current < 0 && logo.x < wrapper.x) {
       xDir.current = increment;
+      hits.current++;
     } else if (xDir.current > 0 && (logo.right > wrapper.right)) {
       xDir.current = -increment;
+      hits.current++;
     }
     if (yDir.current < 0 && logo.y < wrapper.y) {
       yDir.current = increment;
+      hits.current++;
     } else if (yDir.current > 0 && (logo.bottom > wrapper.bottom)) {
       yDir.current = -increment
+      hits.current++;
     }
   }, []);
 
@@ -57,7 +64,7 @@ const ScreenSaverView = () => {
         x: coordiantes.current.x + xDir.current,
         y: coordiantes.current.y + yDir.current,
       }
-      logoEl.current.style = `transform: ${formatTranslate(coordiantes.current)};`;
+      logoEl.current.style = `transform: ${formatTranslate(coordiantes.current)}; filter: ${hueRotate(hits.current)};`;
       start.current = timestamp;
     }
     requestAnimationFrame(updatePosition);

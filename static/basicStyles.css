@@ -61,7 +61,8 @@ ul {
   background-position: bottom center;
   color: transparent;
   display: inline-block;
-  opacity: 0;
+  opacity: 0.01;
+  user-select: none;
   background-image: url(/static/highlights/underline-fat.png);
   filter: grayscale(1);
   
@@ -70,6 +71,7 @@ ul {
   background-repeat: repeat-x;
   background-repeat-y: no-repeat;
   background-repeat-x: repeat;
+  cursor: pointer;
 }
 
 .shrek .menuEntry:hover, .shrek .menuEntry:focus {

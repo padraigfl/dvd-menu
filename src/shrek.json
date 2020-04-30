@@ -10,7 +10,7 @@
   "poster": "https://images-na.ssl-images-amazon.com/images/I/518D7QGC3TL._AC_SY445_.jpg",
   "launch": [{ "start": 0, "length": 7 }],
   "scenes": {
-    "split": 4,
+    "perPage": 4,
     "options": [
       { "link": "/root", "children": "back", "x": 600, "y": 400, "w": 45, "h": 35,
         "style": { "backgroundImage": "url(/static/highlights/scene-back.png", "backgroundSize": "45px", "backgroundPosition": "center", "backgroundRepeat": "no-repeat" }
@@ -87,7 +87,7 @@
       "length": 29
     },
     "play-transition": {
-      "redirect": "/play",
+      "redirect": "/root",
       "start": 78,
       "length": 8
     },
@@ -98,7 +98,7 @@
       "controls": true
     },
     "scenes-transition": {
-      "redirect": "scenes/0",
+      "redirect": "/scenes/0",
       "start": 153,
       "length": 4
     },
@@ -156,27 +156,27 @@
         }
       ]
     },
-    "tech-transition": { "start": 341, "length": 3, "redirect": "/tech" },
+    "tech-transition": { "start": 341, "length": 3, "redirects": "/tech", "redirect": "/features" },
     "tech": {
       "media": "Vb-mrl4EQhA",
       "redirect": "/features",
       "exit": true,
       "controls": true
     },
-    "production-transition": { "start": 348, "length": 3, "redirect": "/production" },
+    "production-transition": { "start": 348, "length": 3, "redirect": "/production", "redirect": "/features" },
     "production": {
       "media": "vS43ZgcQ_hE",
       "redirect": "/features",
       "controls": true
     },
-    "interviews-transition": { "start": 348, "length": 3, "redirect": "/interviews" },
+    "interviews-transition": { "start": 348, "length": 3, "redirect": "/interviews", "redirect": "/features" },
     "interviews": {
       "media": "vS43ZgcQ_hE",
       "redirect": "/features",
       "controls": true
     },
-    "karaoke-transition-1": { "start": 67, "length": 5, "redirect": "/karaoke" },
-    "karaoke-transition-2": { "start": 348, "length": 3, "redirect": "/karaoke" },
+    "karaoke-transition-1": { "start": 67, "length": 5, "redirect": "/karaoke", "redirect": "/root" },
+    "karaoke-transition-2": { "start": 348, "length": 3, "redirect": "/karaoke", "redirect": "/features" },
     "karaoke": {
       "mediasmall": "https://www.youtube.com/watch?v=swdvJzN6LLA",
       "media": "GOYJbhm7n5A",
@@ -184,7 +184,7 @@
       "controls": true,
       "exit": true
     },
-    "dubbing-transition": { "start": 341, "length": 3, "redirect": "/dubbing" },
+    "dubbing-transition": { "start": 341, "length": 3, "redirect": "/dubbing", "redirect": "/features" },
     "dubbing": {
       "media": "ZRX26eAoytg",
       "redirect": "/features",
