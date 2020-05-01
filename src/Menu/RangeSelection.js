@@ -3,6 +3,8 @@ import { generateLink, processOption } from './utils';
 import Entry from './MenuEntry';
 
 const RangeSelection = ({ count, perPage, styles }) => {
+  console.log(count);
+  console.log(styles)
   const iterations = Math.ceil(count/perPage);
   let i = 0;
   const links = [];

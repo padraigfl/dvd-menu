@@ -1,5 +1,4 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
@@ -9,6 +8,9 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: modulePath => /node_modules/.test(modulePath),
         use: [
+          {
+            loader: 'react-hot-loader/webpack'
+          },
           {
             loader: 'babel-loader'
           },
@@ -58,10 +60,6 @@ module.exports = {
       template: './public/index.html',
       filename: './index.html'
     }),
-    new Dotenv({
-      path: './.env',
-      safe: true
-    }),
     new MiniCssExtractPlugin({
       filename: 'styles.css'
     })
@@ -76,6 +74,9 @@ module.exports = {
     publicPath: '/',
   },
   devServer: {
+    host: '0.0.0.0',
+    port: 8080,
+    disableHostCheck: true,
     historyApiFallback: true
   }
 };

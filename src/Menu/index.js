@@ -61,7 +61,9 @@ const DefaultComponent = (props) =>  {
     storeRadioValue(key, value);
   }, [setRadioState, radioValues, storeRadioValue]);
 
-  const setActive = useCallback(() => props.setActive(true), []);
+  const setActive = useCallback(() => {
+    props.setActive(true)
+  }, []);
 
   useEffect(() => {
     props.onLoad({
@@ -73,10 +75,11 @@ const DefaultComponent = (props) =>  {
       controls: props.controls,
     });
     return () => {
-      props.startPageChange();
       props.setActive(false);
     }
   }, []);
+
+  console.log(props.active && props.pageName.match(/^\/scenes\/.*/) && props.scenesData && props.scenesData.scenes.length > props.scenesData.perPage);
 
   return props.active && (
     <MenuWrapper className={cx('defaultComponent', props.pageName)}>
@@ -120,12 +123,12 @@ const DefaultComponent = (props) =>  {
           })}
         </ul>
       }
-      { props.active && props.pageName.match(/^\/?scenes\/.*/) && props.scenesData && props.scenesData.count > props.scenesData.perPage && (
+      { props.active && props.pageName.match(/^\/scenes\/.*/) && props.scenesData && props.scenesData.scenes.length > props.scenesData.perPage && (
         <RangeSelection
           perPage={props.scenesData.perPage}
-          count={props.scenesData.count}
+          count={props.scenesData.scenes.length}
           index={props.index}
-          styles={props.scenesData.styles}
+          styles={props.scenesData.navigation}
         />
       )}
       { /* back and hidden */}

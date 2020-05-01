@@ -1,8 +1,8 @@
 import { styled } from 'linaria/react';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 
-const loopTime = 250;
-const increment = 20;
+const loopTime = 20;
+const increment = 4;
 
 const ScreenSaverBody = styled.div`
   position: absolute;
@@ -13,10 +13,11 @@ const ScreenSaverBody = styled.div`
   overflow: hidden;
   background-color: black;
   img {
-    transition: all linear ${loopTime}ms;
     width: 240px;
   }
 `;
+
+const hueRotate = (val) => `hue-rotate(${(val * 50) % 360}deg)`
 
 const formatTranslate = ({ x, y }) => `translate(${x}px, ${y}px)`
 
@@ -27,19 +28,24 @@ const ScreenSaverView = () => {
   const xDir = useRef(increment);
   const yDir = useRef(increment);
   const start = useRef(null);
+  const hits = useRef(0);
 
   const updateDirection = useCallback(() => {
     const logo = logoEl.current.getBoundingClientRect();
     const wrapper = wrapperEl.current.getBoundingClientRect();
     if (xDir.current < 0 && logo.x < wrapper.x) {
       xDir.current = increment;
+      hits.current++;
     } else if (xDir.current > 0 && (logo.right > wrapper.right)) {
       xDir.current = -increment;
+      hits.current++;
     }
     if (yDir.current < 0 && logo.y < wrapper.y) {
       yDir.current = increment;
+      hits.current++;
     } else if (yDir.current > 0 && (logo.bottom > wrapper.bottom)) {
       yDir.current = -increment
+      hits.current++;
     }
   }, []);
 
@@ -58,7 +64,7 @@ const ScreenSaverView = () => {
         x: coordiantes.current.x + xDir.current,
         y: coordiantes.current.y + yDir.current,
       }
-      logoEl.current.style = `transform: ${formatTranslate(coordiantes.current)};`;
+      logoEl.current.style = `transform: ${formatTranslate(coordiantes.current)}; filter: ${hueRotate(hits.current)};`;
       start.current = timestamp;
     }
     requestAnimationFrame(updatePosition);
@@ -66,7 +72,6 @@ const ScreenSaverView = () => {
 
   useEffect(() => {
     requestAnimationFrame(updatePosition);
-    return () => { start.current = -1; };
   }, []);
 
   return (

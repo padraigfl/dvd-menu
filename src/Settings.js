@@ -91,32 +91,34 @@ class Settings extends React.Component {
         attachVideo,
       }}>
         <Controls>
-          <button onClick={() => {
-            alert(
-              `Subtitles: ${window.localStorage.getItem('subtitles') || 'default'
-                }\nAudio Track: ${window.localStorage.getItem('audio') || 'default'
-                }\n\nNote: This is a recreation of a DVD menu done in JavaScript with the source DVD menu as a background video hosted on youtube, adblockers may be required.`
-            )
-          }}>Settings</button>
-          {window.location.pathname !== '/root' && (
-              <button type="button" onClick={() => navigate('/root')}>Home</button>
-          )}
-          { this.state.initialized ? (
-            <>
-              {/* <button
-                type="button"
-                onClick={() => this.controls(!this.state.controls)}
-              >
-                Video Controls {this.state.controls ? 'On' : 'Off'}
-              </button> */}
-              <button
-                type="button"
-                onClick={() => this.muted(!this.state.muted)}
-              >
-                { this.state.muted ? 'Unmute' : 'Mute' }
-              </button>
-            </>
-          ): (
+          <div  style={{ transform: `scale(${1 / this.props.scale})`, transformOrigin: 'top right' }}>
+            <button onClick={() => {
+              alert(
+                `Subtitles: ${window.localStorage.getItem('subtitles') || 'default'
+                  }\nAudio Track: ${window.localStorage.getItem('audio') || 'default'
+                  }\n\nNote: This is a recreation of a DVD menu done in JavaScript with the source DVD menu as a background video hosted on youtube, adblockers may be required.`
+              )
+            }}>+</button>
+            <button type="button" onClick={() => navigate('/')}>Reset</button>
+            { this.state.initialized && (
+              <>
+                {/* <button
+                  type="button"
+                  onClick={() => this.controls(!this.state.controls)}
+                >
+                  Video Controls {this.state.controls ? 'On' : 'Off'}
+                </button> */}
+                <button
+                  type="button"
+                  onClick={() => this.muted(!this.state.muted)}
+                >
+                  { this.state.muted ? 'Unmute' : 'Mute' }
+                </button>
+              </>
+            )}
+          </div>
+
+          {!this.state.initialized && (
             <Rant>
               <h2>Mute on launch</h2>
               Kinda ruins the thing but super considerate of me, innit?
