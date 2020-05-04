@@ -119,7 +119,7 @@ class DVD extends Component {
           ref={this.ref}
           className={config.title}
           style={
-            { transform: `scale(${this.state.scale}) translateY(-50%)`, transformOrigin: 'center left', marginTop: '50%' }
+            { transform: `scale(${this.state.scale}) translateY(-50vh)`, transformOrigin: 'center left', marginTop: '50%' }
           }
         >
           <Video

@@ -7,10 +7,8 @@ import Menu from "./Menu";
 import Video from "./Video";
 import Settings from "./Settings";
 import Info from "./Info";
+import MainMenu from "./Main";
 
-const Options = () => (
-  <div><Link to="/matrix">Matrix</Link><Link to="/shrek">Shrek</Link></div>
-);
 
 class App extends Component {
   render() {
@@ -27,7 +25,7 @@ class App extends Component {
           { [matrixData, shrekData].map((data) => (
             <DVD key={data.title} data={data} path={`${data.title}/*`} />
           ))}
-          <Options default />
+          <MainMenu discs={[matrixData, shrekData]} default />
         </Router>
         <Info />
       </>
