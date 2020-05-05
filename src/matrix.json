@@ -18,7 +18,7 @@
       "borderRadius": "2px"
     }
   ],
-  "poster": "matrixDvd",
+  "poster": "/static/matrix.jpg",
   "scenes": {
     "NOTES": "Last two pages are so abrupt that they're extremely buggy, I suspect every one of these is tbh",
     "perPage": 6,

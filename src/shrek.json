@@ -10,7 +10,7 @@
     "/static/video/_smallMenu.mp4",
     "https://github.com/padraigfl/dvd-menu/blob/format-update/static/video/_smallMenu.mp4?raw=true"
   ],
-  "poster": "https://images-na.ssl-images-amazon.com/images/I/518D7QGC3TL._AC_SY445_.jpg",
+  "poster": "/static/shrek.jpg",
   "launch": [{ "start": 0, "length": 7 }],
   "scenes": {
     "perPage": 4,

@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { navigate } from '@reach/router';
 import { styled } from 'linaria/react';
 
-const boxWidth = 200;
+const boxWidth = 180;
 const boxBorder = 4;
 const discWidth = boxWidth - boxBorder - 24;
 const transitionTime = 2000;
@@ -32,9 +32,11 @@ const Disc = styled('div')`
   position: absolute;
   width: ${discWidth}px;
   height: ${discWidth}px;
+  max-width: 48vw;
+  max-height: 48vw;
   top: 50%;
   left: 50%;
-  border-radius: ${(discWidth) / 2}px;
+  border-radius: 50%;
   background-image: radial-gradient(transparent 0%, transparent 10%, #999 10%, #999 11%, #aaa 11%, #aaa 20%, transparent 22%, #aaa 22%, #ddd 70%, #aaa 100%);
   border: 1px solid #999;
   content: '';
@@ -43,6 +45,7 @@ const Disc = styled('div')`
 `;
 
 const BoxContainer = styled('div')`
+  margin: 40px auto;
   position: relative;
   height: ${boxWidth*1.4}px;
   width: ${boxWidth}px;
@@ -61,6 +64,7 @@ const MainWrapper = styled('div')`
   width: 100%;
   max-width: 600px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin: auto;
   margin-top: 50vh;
