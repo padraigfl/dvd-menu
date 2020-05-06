@@ -1,14 +1,14 @@
 {
   "title": "shrek",
-  "defaultVideos": "V3airyA0Kig",
-  "types": "video/youtube",
-  "sourceDirs": "https://youtube.com/embed/",
-  "sourceDir": "",
-  "type": "video/mp4",
-  "defaultVideo": "/static/video/_smallMenu.mp4",
+  "sourceDirs": "",
+  "types": "video/mp4",
+  "defaultVideos": "/static/video/_smallMenu.mp4",
+  "defaultVideo": "V3airyA0Kig",
+  "type": "video/youtube",
+  "sourceDir": "https://youtube.com/embed/",
   "backupLocalVideo": [
     "/static/video/_smallMenu.mp4",
-    "https://github.com/padraigfl/dvd-menu/blob/format-update/static/video/_smallMenu.mp4?raw=true"
+    "https://github.com/padraigfl/dvd-menu/blob/master/static/video/_smallMenu.mp4?raw=true"
   ],
   "poster": "/static/shrek.jpg",
   "launch": [{ "start": 0, "length": 7 }],

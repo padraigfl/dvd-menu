@@ -1,13 +1,14 @@
 {
-  "title": "matrix",
-  "defaultVideo": "/static/video/_matrix280k32k.mp4",
-  "type": "video/mp4",
-  "sourceDir": "",
-  "types": "video/youtube",
-  "sourceDirs": "https://youtube.com/embed/",
+  "title": "matrix-BETA",
+  "defaultVideos": "/static/video/_matrix280k32k.mp4",
+  "types": "video/mp4",
+  "sourceDirs": "",
+  "type": "video/youtube",
+  "defaultVideo": "ix0tlRLbTVw",
+  "sourceDir": "https://youtube.com/embed/",
   "backupLocalVideo": [
     "/static/video/_matrixMenu.mp4",
-    "https://github.com/padraigfl/dvd-menu/blob/format-update/static/video/_matrixMenu.mp4?raw=true"
+    "https://github.com/padraigfl/dvd-menu/blob/master/static/video/_matrix280k32k.mp4?raw=true"
   ],
   "defaultLinkStyle": [
     {
