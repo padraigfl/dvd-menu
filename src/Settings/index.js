@@ -1,10 +1,11 @@
 import React, { createContext } from 'react';
 import { navigate } from '@reach/router';
 import { styled } from 'linaria/react';
+import Controls from './Controls';
 
 const SettingsContext = createContext({ muted: true, paused: true });
 
-const Controls = styled.div`
+const StateView = styled.div`
   position: absolute;
   top: 0px;
   right: 0px;
@@ -90,16 +91,8 @@ class Settings extends React.Component {
         },
         attachVideo,
       }}>
-        <Controls>
+        <StateView>
           <div  style={{ transform: `scale(${1 / this.props.scale})`, transformOrigin: 'top right' }}>
-            <button onClick={() => {
-              alert(
-                `Subtitles: ${window.localStorage.getItem('subtitles') || 'default'
-                  }\nAudio Track: ${window.localStorage.getItem('audio') || 'default'
-                  }\n\nNote: This is a recreation of a DVD menu done in JavaScript with the source DVD menu as a background video hosted on youtube, adblockers may be required.`
-              )
-            }}>+</button>
-            <button type="button" onClick={() => navigate('/')}>Reset</button>
             { this.state.initialized && (
               <>
                 {/* <button
@@ -124,7 +117,12 @@ class Settings extends React.Component {
               Kinda ruins the thing but super considerate of me, innit?
             </Rant>
           )}
-        </Controls>
+        </StateView>
+        <Controls
+          initialized={this.state.initialized}
+          muted={this.state.muted}
+          mute={this.muted}
+        />
         {!this.state.controls && this.state.initialized && this.props.children}
       </SettingsContext.Provider>
     )

@@ -9,6 +9,11 @@ body {
   color: white;
 }
 
+#settings {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
 .promo {
   display: inline-block;
   margin-left: 2px;

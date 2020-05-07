@@ -3,12 +3,10 @@ import matrixData from "./matrix.json";
 import shrekData from './shrek.json';
 import { Router, Route, Link } from "@reach/router";
 import DVD from './DVD';
-import Menu from "./Menu";
-import Video from "./Video";
-import Settings from "./Settings";
 import Info from "./Info";
 import MainMenu from "./Main";
 
+const dvds = [shrekData, matrixData];
 
 class App extends Component {
   render() {
@@ -22,10 +20,10 @@ class App extends Component {
           <img style={{width: '32px', height: '32px'}} src="/static/highlights/github-icon.png"/>
         </a>
         <Router>
-          { [matrixData, shrekData].map((data) => (
+          { dvds.map((data) => (
             <DVD key={data.title} data={data} path={`${data.title}/*`} />
           ))}
-          <MainMenu discs={[matrixData, shrekData]} default />
+          <MainMenu discs={dvds} default />
         </Router>
         <Info />
       </>

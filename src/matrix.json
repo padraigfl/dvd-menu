@@ -1,11 +1,11 @@
 {
   "title": "matrix-BETA",
-  "defaultVideos": "/static/video/_matrix280k32k.mp4",
-  "types": "video/mp4",
-  "sourceDirs": "",
   "type": "video/youtube",
   "defaultVideo": "ix0tlRLbTVw",
   "sourceDir": "https://youtube.com/embed/",
+  "defaultVideo": "/static/video/_matrix280k32k.mp4",
+  "type": "video/mp4",
+  "sourceDir": "",
   "backupLocalVideo": [
     "/static/video/_matrixMenu.mp4",
     "https://github.com/padraigfl/dvd-menu/blob/master/static/video/_matrix280k32k.mp4?raw=true"
@@ -89,11 +89,11 @@
     "media": [
       { "start": 89.5, "length": 0.05 },
       { "start": 90.25, "length": 0.05 },
-      { "start": 91, "length": 0.05 },
+      { "start": 90.9, "length": 0.05 },
       { "start": 91.5, "length": 0.05 },
       { "start": 91.9, "length": 0.05 },
       { "start": 92.4, "length": 0.05 },
-      { "start": 92.63, "length": 0.01 }
+      { "start": 92.61, "length": 0.02 }
     ]
   },
   "pages": {
@@ -185,7 +185,7 @@
       "length": 1.5
     },
     "dream-world": {
-      "start": 126.29,
+      "start": 126.26,
       "length": 0.05,
       "options": [
         { "links": "/making-of", "children": "Making the Matrix", "x": 160, "y": 150, "w": 250, "h": 25  },
