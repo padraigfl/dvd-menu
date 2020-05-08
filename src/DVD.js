@@ -137,7 +137,7 @@ class DVD extends Component {
           >
             {({ onLoad, getVideo, clearVideoListeners }) => {
               return (
-                <Settings video={getVideo()} clearVideoListeners={clearVideoListeners} scale={this.state.scale}>
+                <Settings title={config.title} video={getVideo()} clearVideoListeners={clearVideoListeners} scale={this.state.scale}>
                   <Router>
                       {Object.entries(pageOptions).map(([link, data], idx) => {
                         const Component = buildPageComponent({ ...data, title: config.title, defaultLinkStyle, scenesData: scenes, pageName: `/${link}` });

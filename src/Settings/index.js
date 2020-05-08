@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { createContext, createRef } from 'react';
 import { navigate } from '@reach/router';
 import { styled } from 'linaria/react';
 import Controls from './Controls';
@@ -11,6 +11,13 @@ const StateView = styled.div`
   right: 0px;
   width: 100%;
   text-align: right;
+  z-index: 10;
+  .statuses > div {
+    &:first-child {
+      display: block;
+    }
+    display: none;
+  }
 `
 
 const Rant = styled.div`
@@ -38,19 +45,30 @@ const Rant = styled.div`
 
 const StaticScreen = styled('div')`
   position: absolute;
+  top: 0px;
+  left: 0px;
   width: 100%;
   height: 100%;
   background-color: grey;
 `;
 
-const tempDisplay = (id, prev, timer) => {
+const  setDisplay = (ref, val) => {
+  if (!ref || !ref.current) {
+    return;
+  }
+  ref.current.style.display = val ? 'block' : 'none';
+}
+
+const tempDisplay = (ref, prev, timer) => {
+  if (!ref || !ref.current) {
+    return;
+  }
   if (prev) {
     cancelTimeout(prev);
   }
-  const el = document.getElementById(id);
-  el.style.display = 'block';
+  setDisplay(ref, true);
   return setTimeout(() => {
-    el.style.display = 'none';
+    setDisplay(ref, false);
   }, timer);
 }
 
@@ -60,6 +78,12 @@ class Settings extends React.Component {
     pause: false,
     initialized: false,
   }
+
+  mute = createRef();
+  unmute = createRef();
+  noop = createRef();
+  dvdview = createRef();
+  tvview = createRef();
 
   componentDidUpdate() {
     if (this.video !== this.props.video) {
@@ -90,10 +114,16 @@ class Settings extends React.Component {
   muted = (bool) => {
     this.genericSwitch('muted')(bool);
     if (!bool) {
-      tempDisplay('settings--unmute');
+      setDisplay(this.mute, false);
+      tempDisplay(this.unmute, null, 5000);
     } else {
-      mute.current.style.display = 'block';
+      setDisplay(this.mute, true);
+      setDisplay(this.unmute, false);
     }
+  }
+
+  bannedAction = () => {
+    tempDisplay(this.noop, null, 2000);
   }
 
   controls = this.genericSwitch('controls');
@@ -102,7 +132,12 @@ class Settings extends React.Component {
   toggleTv = () =>{
     this.setState(state => {
       if (!state.static) {
+        setDisplay(this.dvdview, false);
+        tempDisplay(this.tvview, null, 2000);
         this.muted(true);
+      } else {
+        setDisplay(this.tvview, false);
+        tempDisplay(this.dvdview, null, 2000);
       }
       return { static: !state.static };
     });
@@ -127,12 +162,12 @@ class Settings extends React.Component {
               Kinda ruins the thing but super considerate of me, innit?
             </Rant>
           ) : (
-          <div  style={{ transform: `scale(${1 / this.props.scale})`, transformOrigin: 'top right' }}>
-            <div id="settings__mute" style={{ display: this.video.muted() ? 'none' : 'block'}}>MUTE</div>
-            <div id="settings__unmute" style={{ display: this.video.muted() ? 'none' : 'block'}}>UNMUTE</div>
-            <div id="settings__noop" style={{ display: 'none' }}>N/A</div>
-            <div id="settings__dvdview" style={{ display: 'none' }}>DVD</div>
-            <div id="settings__tvview" style={{ display: 'none' }}>DVD</div>
+          <div className="statuses" style={{ transform: `scale(${1 / this.props.scale})`, transformOrigin: 'top right' }}>
+            <div id="status__mute" ref={this.mute}>MUTE</div>
+            <div id="status__unmute" ref={this.unmute}>UNMUTE</div>
+            <div id="status__noop" ref={this.noop}>NO-OP</div>
+            <div id="status__dvdview" ref={this.dvdview}>DVD</div>
+            <div id="status__tvview" ref={this.tvview}>TV</div>
           </div>
           )}
         </StateView>
@@ -141,6 +176,8 @@ class Settings extends React.Component {
           mute={this.muted}
           toggleTv={this.toggleTv}
           video={this.props.video}
+          defaultClick={this.bannedAction}
+          title={this.props.title}
         />
         {this.state.initialized && this.props.children}
         { this.state.static && (
