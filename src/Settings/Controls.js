@@ -1,28 +1,35 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { navigate } from '@reach/router';
 import { styled } from 'linaria/react';
+import { cx } from 'linaria';
 
 const Remote = styled('div')`
   z-index: 100;
   position: absolute;
   bottom: 0px;
   left: 50%;
-  border-radius: 10%;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  border-bottom-left-radius: 30%;
+  border-bottom-right-radius: 30%;
   transform: translateX(-50%);
   background-color: #111;
-  height: 450px;
-  max-height: 72vh;
   width: 250px;
-  max-wdith: 40vh;
+  max-wdith: 20vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding: 20px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  transform: perspective(500px) rotate3d(10, 0, -1.5, 40deg) translate3d(-80px, 0px, 0px) scale3d(1, 1, -0.2);
-  box-shadow: 1px 20px 0px 1px black, 2px 23px 3px #aaa, inset 0px 0px 3px 0px #aaa,inset 0px 0px 0px 2px #111;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  transform: perspective(1000px) translate3d(0px, 50%, 0px);
+  transition: transform ease-in 2s;
+  &.remote--active {
+    height: 480px;
+    transform:  perspective(500px) rotate3d(1,0,-0.3,40deg) translate3d(-80px,-20%,-100px) scale3d(1,1,1);
+  }
+  box-shadow: 1px 24px 0px -5px #111,2px 20px 20px #aaa,inset 0px 0px 3px 0px #aaa,inset 0px 0px 0px 2px #111;
   > button {
     &:nth-child(3n - 1):not(:last-child) {
       margin-top: 0;
@@ -43,27 +50,39 @@ const auxThing = () => {
 };
 
 const RemoteButton = styled('button')`
-  width: 25%;
+  width: 27%;
   height: 35px;
   border-radius: 35%;
-  margin: 11px 10px;
+  margin: 11px 5px;
   translate: translate3d(0, 0, 5px);
   text-align: center;
+  text-transform: uppercase;
   background-color: ${props => props.color || 'white'};
   border: 1px solid grey;
-  box-shadow: ${props => `0 2px 0px 1px ${props.color || 'white'}, 0px 3px 0px 1px black`};
+  box-shadow: ${props => `0 4px 0px 0px ${props.color || 'white'}, 0px 5px 0px 1px black`};
+  font-weight: bold;
+  font-size: 16px;
+  padding: 0px;
+  &.Power {
+    height: 50px;
+    border-radius: 50%;
+  }
   &:active {
-    transform: perspective(500px) translate3d(0, 2px, 3px);
-    box-shadow: 0px 1px 0px #ccc;
+    transform: perspective(500px) translate3d(0, 4px, 3px);
+    box-shadow: 0px 2px 0px #ccc;
+  }
+  &:disabled {
+    filter: greyscale(0.5) opacity(0.2);
   }
 `;
 
 const Controls = (props) => {
+  const [active, setActive] = useState(false);
   const buttons = useMemo(() => (
     [
-      { icon: 'TV/DVD', onClick: navigate('/static') },
-      { icon: 'Power', onClick: navigate('/'), color: 'red' },
-      { icon: 'Eject', onClick: navigate('/') },
+      { icon: 'TV/DVD', onClick: props.toggleTv },
+      { icon: 'Power', onClick: () => navigate('/'), color: 'red' },
+      { icon: 'Eject', onClick: () => navigate('/') },
     
       ...new Array(9).fill(null).map((_, idx) => ({ icon: idx + 1 })),
     
@@ -78,18 +97,29 @@ const Controls = (props) => {
       { icon: '-', onClick: () => props.mute(true), disabled: props.muted },
       { icon: 'OK' },
       { icon: '+', onClick: () => props.mute(false), disabled: !props.muted },
-      { icon: 'Hide', onClick: props.hide },
-      { icon: 'Menu', onClick: navigate(`/${props.title || 'shrek'}/root`) },
+      { icon: 'Hide', onClick: () => setActive(false) },
+      { icon: 'Menu', onClick: () => navigate(`/${props.title || 'shrek'}/root`) },
     ]
-  ), [props.mute, props.muted]);
+  ), [
+    props.mute,
+    props.muted,
+    props.title,
+    props.toggleTv,
+  ]);
   
   return ReactDOM.createPortal(
-    <Remote>
+    <Remote
+      onClick={!active ? () => setActive(true) : undefined}
+      role={!active ? 'button' : undefined}
+      className={active ? 'remote--active' : undefined}
+    >
       { buttons.map(button => (
         <RemoteButton
-          onClick={ button.onClick || props.dummyAction}
-          disabled={ button.disabled }
+          key={button.icon}
+          onClick={ active ? (button.onClick || props.dummyAction) : undefined}
+          disabled={ !active || button.disabled }
           color={button.color}
+          className={button.icon}
         >
           {button.icon}
         </RemoteButton>

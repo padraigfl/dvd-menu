@@ -4,6 +4,7 @@ import Menu from "./Menu";
 import Video from "./Video";
 import Settings from "./Settings";
 import Info from "./Info";
+import { cx } from "linaria";
 
 const buildPageComponent = data => (props) => {
   const {
@@ -117,9 +118,13 @@ class DVD extends Component {
         <div
           id="wrapper"
           ref={this.ref}
-          className={config.title}
+          className={cx('dvd', config.title)}
           style={
-            { transform: `scale(${this.state.scale}) translateY(-50%)`, transformOrigin: 'center left', marginTop: '50vh' }
+            {
+              marginTop: !this.state.scale || this.state.scale === 1 ? '50vh' : undefined,
+              transform: this.state.scale !== 1 ? `scale(${this.state.scale})` : 'translateY(-50%)',
+              transformOrigin: 'center left',
+            }
           }
         >
           <Video

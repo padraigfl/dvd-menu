@@ -36,6 +36,24 @@ const Rant = styled.div`
     ;
 `;
 
+const StaticScreen = styled('div')`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: grey;
+`;
+
+const tempDisplay = (id, prev, timer) => {
+  if (prev) {
+    cancelTimeout(prev);
+  }
+  const el = document.getElementById(id);
+  el.style.display = 'block';
+  return setTimeout(() => {
+    el.style.display = 'none';
+  }, timer);
+}
+
 class Settings extends React.Component {
   state = {
     muted: true,
@@ -66,64 +84,68 @@ class Settings extends React.Component {
     }
     else {
       this.video[key](bool);
-      this.setState({ [key]: bool });
     }
   }
 
-  muted = this.genericSwitch('muted')
+  muted = (bool) => {
+    this.genericSwitch('muted')(bool);
+    if (!bool) {
+      tempDisplay('settings--unmute');
+    } else {
+      mute.current.style.display = 'block';
+    }
+  }
+
   controls = this.genericSwitch('controls');
   play = () => this.video.play()
-  pause = () => {
-    this.video.pause();
-    this.setState({ pause: true });
-    this.video.one('play', () => this.setState({ pause: false }));
+
+  toggleTv = () =>{
+    this.setState(state => {
+      if (!state.static) {
+        this.muted(true);
+      }
+      return { static: !state.static };
+    });
   }
 
   render() {
-    const { attachVideo, state, muted, play, pause } = this;
+    const { attachVideo, state, play, pause } = this;
     return (
       <SettingsContext.Provider value={{
         state,
         actions: {
-          muted,
           play,
           pause
         },
         attachVideo,
       }}>
         <StateView>
-          <div  style={{ transform: `scale(${1 / this.props.scale})`, transformOrigin: 'top right' }}>
-            { this.state.initialized && (
-              <>
-                {/* <button
-                  type="button"
-                  onClick={() => this.controls(!this.state.controls)}
-                >
-                  Video Controls {this.state.controls ? 'On' : 'Off'}
-                </button> */}
-                <button
-                  type="button"
-                  onClick={() => this.muted(!this.state.muted)}
-                >
-                  { this.state.muted ? 'Unmute' : 'Mute' }
-                </button>
-              </>
-            )}
-          </div>
 
-          {!this.state.initialized && (
+          {!this.state.initialized ? (
             <Rant>
               <h2>Mute on launch</h2>
               Kinda ruins the thing but super considerate of me, innit?
             </Rant>
+          ) : (
+          <div  style={{ transform: `scale(${1 / this.props.scale})`, transformOrigin: 'top right' }}>
+            <div id="settings__mute" style={{ display: this.video.muted() ? 'none' : 'block'}}>MUTE</div>
+            <div id="settings__unmute" style={{ display: this.video.muted() ? 'none' : 'block'}}>UNMUTE</div>
+            <div id="settings__noop" style={{ display: 'none' }}>N/A</div>
+            <div id="settings__dvdview" style={{ display: 'none' }}>DVD</div>
+            <div id="settings__tvview" style={{ display: 'none' }}>DVD</div>
+          </div>
           )}
         </StateView>
         <Controls
           initialized={this.state.initialized}
-          muted={this.state.muted}
           mute={this.muted}
+          toggleTv={this.toggleTv}
+          video={this.props.video}
         />
-        {!this.state.controls && this.state.initialized && this.props.children}
+        {this.state.initialized && this.props.children}
+        { this.state.static && (
+          <StaticScreen />
+        )}
       </SettingsContext.Provider>
     )
   }
