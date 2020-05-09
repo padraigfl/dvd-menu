@@ -137,7 +137,7 @@ const DefaultComponent = (props) =>  {
       )}
       { /* back and hidden */}
       <Helmet title={`DVD: ${props.title} -- ${props.pageName}`} />
-      {/* <ScreenSaver /> */}
+      <ScreenSaver />
     </MenuWrapper>
   )
 };

@@ -10,8 +10,10 @@ const StateView = styled.div`
   top: 0px;
   right: 0px;
   width: 100%;
-  text-align: right;
   z-index: 10;
+  .statuses {
+    display: flex;
+  }
   .statuses > div {
     &:first-child {
       display: block;
@@ -19,6 +21,16 @@ const StateView = styled.div`
     display: none;
   }
 `
+
+const StatusDisplay = styled.div`
+  margin: 20px;
+  margin-left: auto;
+  font-size: 24px;
+  color: white;
+  text-shadow: 1px 1px 1px black, -1px -1px 1px black, -1px 1px 1px black, 1px -1px 1px black, 1px 0px 1px black, 0px 1px 1px black, -1px 0px 1px black, 0px -1px 1px black;
+  position: ${({ left }) => left ? 'absolute' : 'relative'};
+  left: ${({ left }) => left ? '20px' : 'initial'};
+`;
 
 const Rant = styled.div`
   h2 {
@@ -44,12 +56,21 @@ const Rant = styled.div`
 `;
 
 const StaticScreen = styled('div')`
+  z-index: 20;
   position: absolute;
   top: 0px;
   left: 0px;
   width: 100%;
   height: 100%;
   background-color: grey;
+  &:after {
+    content: 'NO SIGNAL';
+    color: #2f6;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 48px;
+  }
 `;
 
 const  setDisplay = (ref, val) => {
@@ -123,7 +144,7 @@ class Settings extends React.Component {
   }
 
   bannedAction = () => {
-    tempDisplay(this.noop, null, 2000);
+    tempDisplay(this.noop, null, 1000);
   }
 
   controls = this.genericSwitch('controls');
@@ -163,11 +184,9 @@ class Settings extends React.Component {
             </Rant>
           ) : (
           <div className="statuses" style={{ transform: `scale(${1 / this.props.scale})`, transformOrigin: 'top right' }}>
-            <div id="status__mute" ref={this.mute}>MUTE</div>
-            <div id="status__unmute" ref={this.unmute}>UNMUTE</div>
-            <div id="status__noop" ref={this.noop}>NO-OP</div>
-            <div id="status__dvdview" ref={this.dvdview}>DVD</div>
-            <div id="status__tvview" ref={this.tvview}>TV</div>
+            <StatusDisplay ref={this.mute}>MUTE</StatusDisplay>
+            <StatusDisplay ref={this.unmute}>UNMUTE</StatusDisplay>
+            <StatusDisplay ref={this.noop} left>NO-OP</StatusDisplay>
           </div>
           )}
         </StateView>
