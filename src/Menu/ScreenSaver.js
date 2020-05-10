@@ -1,5 +1,6 @@
 import { styled } from 'linaria/react';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { navigate } from '@reach/router';
 
 const loopTime = 20;
 const increment = 4;
@@ -12,6 +13,7 @@ const ScreenSaverBody = styled.div`
   height: 100%;
   overflow: hidden;
   background-color: black;
+  z-index: 15;
   img {
     width: 240px;
   }
@@ -33,12 +35,16 @@ const ScreenSaverView = () => {
   const updateDirection = useCallback(() => {
     const logo = logoEl.current.getBoundingClientRect();
     const wrapper = wrapperEl.current.getBoundingClientRect();
+    let logoOnHorizontalEdge = true;
+    let logoOnVerticalEdge = true;
     if (xDir.current < 0 && logo.x < wrapper.x) {
       xDir.current = increment;
       hits.current++;
     } else if (xDir.current > 0 && (logo.right > wrapper.right)) {
       xDir.current = -increment;
       hits.current++;
+    } else {
+      logoOnHorizontalEdge = false;
     }
     if (yDir.current < 0 && logo.y < wrapper.y) {
       yDir.current = increment;
@@ -46,6 +52,11 @@ const ScreenSaverView = () => {
     } else if (yDir.current > 0 && (logo.bottom > wrapper.bottom)) {
       yDir.current = -increment
       hits.current++;
+    } else {
+      logoOnVerticalEdge = false;
+    }
+    if (logoOnHorizontalEdge && logoOnVerticalEdge) {
+      navigate('/victory');
     }
   }, []);
 
