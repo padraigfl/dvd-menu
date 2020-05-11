@@ -11,9 +11,10 @@ const Box = styled('a')`
   top: 50%;
   left: 50%;
   height: 100%;
-  width: 100%;
+  width:  ${({ oldbox }) => oldbox ? `calc(100% - ${boxBorder*3}px)` : '100%'};
   border: ${boxBorder}px solid black;
   border-left: 1px solid black;
+  border-right: ${ ({ oldbox }) => oldbox ?  `${boxBorder * 3}px solid black` :  `${boxBorder}px solid black`};
   border-radius: 2px;
   background-image: ${props => `url(${props.backgroundImage})`};
   background-size: cover;
@@ -26,6 +27,20 @@ const Box = styled('a')`
   };
   transform-origin: bottom left;
   transition: all linear ${transitionTime}ms;
+
+  &:after {
+    position: absolute;
+    right: -${boxBorder * 2.5}px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: ${boxWidth/3}px;
+    width: 20px;
+    background-color: black;
+    content: '';
+    border-top-left-radius: 200%;
+    border-bottom-left-radius: 200%;
+    display: ${({ oldbox }) => oldbox ? 'block' : 'none'};
+  }
 `;
 
 const Disc = styled('div')`
@@ -82,6 +97,7 @@ const FilmOption = (props) => {
       navigate(link);
     }, transitionTime*3);
   }, []);
+
   return (
     <BoxContainer
       data-name={props.title}
@@ -91,6 +107,7 @@ const FilmOption = (props) => {
         transitionState={transitionState} 
         href={`/${props.title}`}
         backgroundImage={props.poster}
+        oldbox={props.title.includes('matrix')}
         onClick={clickAction}
       />
     </BoxContainer>

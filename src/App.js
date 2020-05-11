@@ -46,9 +46,9 @@ class App extends Component {
             <DVD key={data.title} data={data} path={`${data.title}/*`} />
           ))}
           <Victory path="/victory" />
+          <Info path="/info"/>
           <MainMenu discs={dvds} default />
         </Router>
-        <Info />
       </>
     );
   }

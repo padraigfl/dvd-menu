@@ -183,7 +183,9 @@ class Settings extends React.Component {
               Kinda ruins the thing but super considerate of me, innit?
             </Rant>
           ) : (
-          <div className="statuses" style={{ transform: `scale(${1 / this.props.scale})`, transformOrigin: 'top right' }}>
+          <div
+            className="statuses"
+          >
             <StatusDisplay ref={this.mute}>MUTE</StatusDisplay>
             <StatusDisplay ref={this.unmute}>UNMUTE</StatusDisplay>
             <StatusDisplay ref={this.noop} left>NO-OP</StatusDisplay>

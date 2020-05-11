@@ -127,16 +127,16 @@ const Controls = (props) => {
       { icon: '0' },
       { icon: 'aux', onClick: auxThing },
     
-      { icon: 'rew' },
+      { icon: '<<' },
       { icon: 'play' },
-      { icon: 'ff' },
+      { icon: '>>' },
 
-      { icon: '-', onClick: () => props.mute(true) },
+      { icon: 'vol-', onClick: () => props.mute(true) },
       { icon: 'Menu', href: `/${ (props.title || 'shrek') }/root` },
-      { icon: '+', onClick: () => props.mute(false) },
+      { icon: 'vol+', onClick: () => props.mute(false) },
 
       { icon: 'Hide', onClick: () => setActive(false) },
-      { icon: 'HELP', href: '/help' },
+      { icon: 'Info', href: '/info' },
     ]
   ), [
     props.mute,
@@ -166,7 +166,7 @@ const Controls = (props) => {
                 : props.defaultClick
           }
           disabled={ !active || button.disabled }
-          color={button.color}
+          color={button.color || (!button.onClick && !button.href ? 'rgba(255, 255, 255, 0.5)' : undefined)}
           className={button.icon}
         >
           {button.icon}
