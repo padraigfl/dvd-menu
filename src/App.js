@@ -34,13 +34,23 @@ class App extends Component {
   render() {
     return (
       <>
-        <a
-          href="https://github.com/padraigfl/dvd-menu"
+        <Link
+          to="/info"
           target="_blank"
-          style={ {position: 'absolute', top: '0', left: '0' } }
+          style={ {
+            position: 'absolute',
+            top: '4px',
+            left: '4px',
+            color: 'white',
+            fontSize: '28px',
+            padding: '4px 9px 2px',
+            textDecoration: 'none',
+            textAlign: 'center',
+            border: '2px solid white',
+          } }
         >
-          <img style={{width: '32px', height: '32px'}} src="/static/highlights/github-icon.png"/>
-        </a>
+          ?
+        </Link>
         <Router>
           { dvds.map((data) => (
             <DVD key={data.title} data={data} path={`${data.title}/*`} />

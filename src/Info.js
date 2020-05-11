@@ -3,13 +3,14 @@ import { styled } from 'linaria/react';
 import { Link } from '@reach/router';
 
 const InfoWrapper= styled.div`
+  position: relative;
   overflow: auto;
   background-color: #999;
   z-index: 10;
   padding: 16px;
   padding-bottom: 20px;
   padding-top: 50px;
-
+  text-shadow: 0px 0px 2px black;
   img {
     margin-top: -2px;
     margin-bottom: -2px;
@@ -24,6 +25,7 @@ const InfoWrapper= styled.div`
 const Info = () => (
   <InfoWrapper>
     <Link to="/">Home</Link>
+    <h2>What is this?</h2>
     <p>
       This project attempts to recreate DVD menus using the source menu video file from the DVD. {' '}
       Most custom configuration is handled via JSON so the code could be used to make others. {' '}<br />

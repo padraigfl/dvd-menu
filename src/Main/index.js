@@ -118,7 +118,7 @@ const MainMenu = (props) => {
   return (
     <MainWrapper>
       {props.discs.map(disc => (
-        <FilmOption {...disc} />
+        <FilmOption key={disc.title} {...disc} />
       ))}
     </MainWrapper>
   )

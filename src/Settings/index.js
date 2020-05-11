@@ -180,7 +180,7 @@ class Settings extends React.Component {
           {!this.state.initialized ? (
             <Rant>
               <h2>Mute on launch</h2>
-              Kinda ruins the thing but super considerate of me, innit?
+              Kinda ruins the thing but browsers will be nicer to autoplay this way
             </Rant>
           ) : (
           <div
