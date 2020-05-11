@@ -123,7 +123,7 @@ class DVD extends Component {
             {
               marginTop: !this.state.scale || this.state.scale === 1 ? '50vh' : undefined,
               transform: this.state.scale !== 1 ? `scale(${this.state.scale})` : 'translateY(-50%)',
-              transformOrigin: 'center left',
+              transformOrigin: 'top left',
             }
           }
         >

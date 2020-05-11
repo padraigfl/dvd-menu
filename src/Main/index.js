@@ -2,8 +2,8 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { navigate } from '@reach/router';
 import { styled } from 'linaria/react';
 
-const boxWidth = 180;
-const boxBorder = 4;
+const boxWidth = 150;
+const boxBorder = 3;
 const discWidth = boxWidth - boxBorder - 24;
 const transitionTime = 2000;
 const Box = styled('a')`
@@ -57,6 +57,7 @@ const Disc = styled('div')`
   content: '';
   transform: translate3d(-50%, -50%, 0) rotate3d(0, 0, 0, 0deg) scale(1);
   animation: ${({ transitionState }) => transitionState === 'open' ? '4s insertDisc 2s' : 'none' };
+  display: ${ ({ transitionState }) => transitionState ? 'block' : 'none' };
 `;
 
 const BoxContainer = styled('div')`

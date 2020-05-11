@@ -23,7 +23,7 @@ const Remote = styled('div')`
   padding: 20px;
   padding-top: 50px;
   padding-bottom: 50px;
-  transform: ${ ({ initialized }) => `perspective(1000px) translate3d(0px, ${ initialized ? '50%' : '80%' }, 0px)` };
+  transform: ${ ({ initialized }) => `perspective(1000px) translate3d(0px, ${ initialized ? '50%' : '85%' }, 0px)` };
   filter: ${ ({ initialized }) => initialized ? `opacity(0.6) grayscale(0.5)` : `opacity(0.2)`};
   transition: transform ease-in 1s, filter linear 1s;
   box-shadow: 1px 24px 0px -5px #111, 2px 20px 20px #aaa, inset 0px 0px 3px 0px #aaa, inset 0px 0px 0px 2px #111;
@@ -38,7 +38,7 @@ const Remote = styled('div')`
 
   &.remote--active {
     height: 480px;
-    transform:  perspective(500px) rotate3d(1,0,-0.3,40deg) translate3d(-80px,-20%,-100px) scale3d(1,1,1);
+    transform:  perspective(500px) rotate3d(1,0,-0.3,40deg) translate3d(-110px,-22%,-200px) scale3d(1,1,1);
     filter: none;
     > button, > a {
       pointer-events: initial;
