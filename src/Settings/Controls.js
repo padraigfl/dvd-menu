@@ -78,6 +78,10 @@ const remoteButtonStyles = css`
   color: black;
   text-decoration: none;
   box-shadow: 0 4px 0px 0px white, 0px 5px 0px 1px black;
+  img {
+    max-width: 25px;
+    max-height: 25px;
+  }
   &.Power {
     height: 50px;
     border-radius: 50%;
@@ -117,26 +121,26 @@ const Controls = (props) => {
   }, []);
   const buttons = useMemo(() => (
     [
-      { icon: 'TV/DVD', onClick: props.toggleTv },
-      { icon: 'Power', href: '/', color: 'red' },
-      { icon: 'Eject', href: '/' },
+      { text: 'TV/DVD', onClick: props.toggleTv },
+      { text: 'Power', href: '/', color: 'red', icon: 'icons/power.png' },
+      { text: '\u23cf', href: '/' },
     
-      ...new Array(9).fill(null).map((_, idx) => ({ icon: idx + 1 })),
+      ...new Array(9).fill(null).map((_, idx) => ({ text: idx + 1 })),
     
-      { icon: 'subs', onClick: subThing },
-      { icon: '0' },
-      { icon: 'aux', onClick: auxThing },
+      { text: 'subs', onClick: subThing },
+      { text: '0' },
+      { text: 'aux', onClick: auxThing },
     
-      { icon: '<<' },
-      { icon: 'play' },
-      { icon: '>>' },
+      { text: '<<' || '\u23ea', icon: 'icons/rw.png' },
+      { text: '▶' },
+      { text: '>>' || '\u23e9', icon: 'icons/ff.png' },
 
-      { icon: 'vol-', onClick: () => props.mute(true) },
-      { icon: 'Menu', href: `/${ (props.title || 'shrek') }/root` },
-      { icon: 'vol+', onClick: () => props.mute(false) },
+      { text: 'vol-', onClick: () => props.mute(true) },
+      { text: 'Menu', href: `/${ (props.title || 'shrek') }/root` },
+      { text: 'vol+', onClick: () => props.mute(false) },
 
-      { icon: 'Hide', onClick: () => setActive(false) },
-      { icon: 'Info', href: '/info' },
+      { text: 'Hide', onClick: () => setActive(false) },
+      { text: 'Info', href: '/info' },
     ]
   ), [
     props.mute,
@@ -169,7 +173,7 @@ const Controls = (props) => {
           color={button.color || (!button.onClick && !button.href ? 'rgba(255, 255, 255, 0.5)' : undefined)}
           className={button.icon}
         >
-          {button.icon}
+          {button.icon ? <img src={`/static/${button.icon}`} alt={button.text} /> : button.text}
         </RemoteButton>
       ))}
     </Remote>,

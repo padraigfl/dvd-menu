@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { navigate } from '@reach/router';
 import { styled } from 'linaria/react';
 
-const boxWidth = 150;
+const boxWidth = 250;
 const boxBorder = 3;
 const discWidth = boxWidth - boxBorder - 24;
 const transitionTime = 2000;
@@ -47,8 +47,8 @@ const Disc = styled('div')`
   position: absolute;
   width: ${discWidth}px;
   height: ${discWidth}px;
-  max-width: 48vw;
-  max-height: 48vw;
+  max-width: 40vw;
+  max-height: 40vw;
   top: 50%;
   left: 50%;
   border-radius: 50%;
@@ -65,6 +65,8 @@ const BoxContainer = styled('div')`
   position: relative;
   height: ${boxWidth*1.4}px;
   width: ${boxWidth}px;
+  max-height: ${49*1.4}vw;
+  max-width: 49vw;
   &:after {
     position: absolute;
     top: 100%;
@@ -85,6 +87,14 @@ const MainWrapper = styled('div')`
   margin: auto;
   margin-top: 50vh;
   transform: translateY(-50%);
+`;
+const Message = styled('div')`
+  &:after {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    content: 'Click on a box to play';
+  }
 `;
 
 const FilmOption = (props) => {
@@ -118,6 +128,7 @@ const FilmOption = (props) => {
 const MainMenu = (props) => {
   return (
     <MainWrapper>
+      <Message />
       {props.discs.map(disc => (
         <FilmOption key={disc.title} {...disc} />
       ))}

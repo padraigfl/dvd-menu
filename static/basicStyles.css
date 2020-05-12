@@ -90,6 +90,6 @@ ul {
 
 @keyframes insertDisc {
   0% { transform: translate3d(-50%, -50%, 0) rotate3d(0, 0, 0, 0deg) scale(1); }
-  70% { transform: translate3d(-50%, -150%, 0px) rotate3d(1, 0, 0, 80deg) scale(0.9); }
+  70% { transform: translate3d(-50%, -150%, 0px) rotate3d(1, 0, 0, 80deg) scale(1); }
   100% { transform: translate3d(-50%, -200%, 150px) rotate3d(1, 0, 0, 80deg) scale(0.1); }
 }

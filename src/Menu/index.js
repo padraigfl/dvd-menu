@@ -27,6 +27,18 @@ const MenuWrapper = styled.div`
     }
   }
 `;
+const Message = styled('div')`
+  &:after {
+    font-size: 16px;
+    max-width: calc(100vw - 150px);
+    transform: ${({ scaling = 1 }) => `translate(-50%, -${scaling < 1 ? (100 / scaling) : 100}%) scale(${1 / scaling})`};
+    position: absolute;
+    left: 50%;
+    text-align: center;
+    content: 'Click on items in the menu on screen to navigate';
+  }
+`;
+
 
 const storeRadioValue = (key, value) => window.localStorage.setItem(key, value);;
 
@@ -82,6 +94,7 @@ const DefaultComponent = (props) =>  {
 
   return props.active && (
     <MenuWrapper className={cx('defaultComponent', props.pageName)}>
+      <Message scaling={props.scale} />
       { Array.isArray(props.options) && props.options.length > 0  &&
         <ul>
           { props.options.map((option) => {

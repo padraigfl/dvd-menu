@@ -20,7 +20,7 @@ const buildPageComponent = data => (props) => {
     options
       ? options.map((o) => ({
           ...o,
-          link: o.link ? `/${title}${o.link}` : undefined,
+          link: o.link && !o.link.match(/^https?:\/\/.*/) ? `/${title}${o.link}` : o.link,
         }))
       : undefined,
     [props.options],
@@ -121,8 +121,8 @@ class DVD extends Component {
           className={cx('dvd', config.title)}
           style={
             {
-              marginTop: !this.state.scale || this.state.scale === 1 ? '50vh' : undefined,
-              transform: this.state.scale !== 1 ? `scale(${this.state.scale})` : 'translateY(-50%)',
+              marginTop: '50px',
+              transform: this.state.scale !== 1 ? `scale(${this.state.scale})` : '',
               transformOrigin: 'top left',
             }
           }
@@ -143,6 +143,7 @@ class DVD extends Component {
                         const Component = buildPageComponent({ ...data, title: config.title, defaultLinkStyle, scenesData: scenes, pageName: `/${link}` });
                         return (
                           <Component
+                            scale={this.state.scale}
                             onLoad={onLoad}
                             path={`/${link}`}
                             key={`r${idx}`}

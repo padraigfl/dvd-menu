@@ -176,20 +176,21 @@ class Settings extends React.Component {
         attachVideo,
       }}>
         <StateView>
-
           {!this.state.initialized ? (
             <Rant>
               <h2>Mute on launch</h2>
               Kinda ruins the thing but browsers will be nicer to autoplay this way
             </Rant>
           ) : (
-          <div
-            className="statuses"
-          >
-            <StatusDisplay ref={this.mute}>MUTE</StatusDisplay>
-            <StatusDisplay ref={this.unmute}>UNMUTE</StatusDisplay>
-            <StatusDisplay ref={this.noop} left>NO-OP</StatusDisplay>
-          </div>
+            <>
+              <div
+                className="statuses"
+              >
+                <StatusDisplay ref={this.mute}>MUTE</StatusDisplay>
+                <StatusDisplay ref={this.unmute}>UNMUTE</StatusDisplay>
+                <StatusDisplay ref={this.noop} left>NO-OP</StatusDisplay>
+              </div>
+            </>
           )}
         </StateView>
         <Controls

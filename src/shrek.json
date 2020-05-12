@@ -1,11 +1,11 @@
 {
   "title": "shrek",
-  "defaultVideo": "/static/video/_smallMenu.mp4",
-  "type": "video/mp4",
-  "sourceDir": "",
   "defaultVideo": "V3airyA0Kig",
   "type": "video/youtube",
   "sourceDir": "https://youtube.com/embed/",
+  "defaultVideo": "/static/video/_smallMenu.mp4",
+  "type": "video/mp4",
+  "sourceDir": "",
   "backupLocalVideo": [
     "/static/video/_smallMenu.mp4",
     "https://github.com/padraigfl/dvd-menu/blob/master/static/video/_smallMenu.mp4?raw=true"
