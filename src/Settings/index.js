@@ -27,9 +27,21 @@ const StatusDisplay = styled.div`
   margin-left: auto;
   font-size: 24px;
   color: white;
-  text-shadow: 1px 1px 1px black, -1px -1px 1px black, -1px 1px 1px black, 1px -1px 1px black, 1px 0px 1px black, 0px 1px 1px black, -1px 0px 1px black, 0px -1px 1px black;
+  text-shadow: 2px 2px 2px black, -2px -2px 2px black, -2px 2px 2px black, 2px -2px 2px black, 2px 0px 2px black, 0px 2px 2px black, -2px 0px 2px black, 0px -2px 2px black;
   position: ${({ left }) => left ? 'absolute' : 'relative'};
   left: ${({ left }) => left ? '20px' : 'initial'};
+  img {
+    max-width: 60px;
+    max-height: 60px;
+    filter: brightness(100)
+    drop-shadow(2px 0px 0 black)
+    drop-shadow(0px 2px 0 black)
+    drop-shadow(-2px 0px 0 black)
+    drop-shadow(0px -2px 0 black)
+    drop-shadow(-2px -2px 0px black)
+    drop-shadow(2px 2px 0px black)
+    drop-shadow(0px 0px 2px black);
+  }
 `;
 
 const Rant = styled.div`
@@ -186,9 +198,9 @@ class Settings extends React.Component {
               <div
                 className="statuses"
               >
-                <StatusDisplay ref={this.mute}>MUTE</StatusDisplay>
-                <StatusDisplay ref={this.unmute}>UNMUTE</StatusDisplay>
-                <StatusDisplay ref={this.noop} left>NO-OP</StatusDisplay>
+                <StatusDisplay ref={this.mute}><img src="/static/icons/mute.png" alt="" /></StatusDisplay>
+                <StatusDisplay ref={this.unmute}><img src="/static/icons/unmute.png" alt="" /></StatusDisplay>
+                <StatusDisplay ref={this.noop} left><span>NO-OP</span></StatusDisplay>
               </div>
             </>
           )}

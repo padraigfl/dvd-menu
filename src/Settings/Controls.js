@@ -81,6 +81,7 @@ const remoteButtonStyles = css`
   img {
     max-width: 25px;
     max-height: 25px;
+    filter: brightness(0);
   }
   &.Power {
     height: 50px;
@@ -135,9 +136,9 @@ const Controls = (props) => {
       { text: '▶' },
       { text: '>>' || '\u23e9', icon: 'icons/ff.png' },
 
-      { text: 'vol-', onClick: () => props.mute(true) },
+      { text: 'vol-', onClick: () => props.mute(true),  icon: '/icons/mute.png' },
       { text: 'Menu', href: `/${ (props.title || 'shrek') }/root` },
-      { text: 'vol+', onClick: () => props.mute(false) },
+      { text: 'vol+', onClick: () => props.mute(false), icon: 'icons/unmute.png' },
 
       { text: 'Hide', onClick: () => setActive(false) },
       { text: 'Info', href: '/info' },
