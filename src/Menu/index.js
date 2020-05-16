@@ -2,6 +2,7 @@ import React, {
   useState,
   useEffect,
   useCallback,
+  useMemo,
   useRef,
 } from 'react';
 import { cx } from 'linaria';
@@ -26,6 +27,18 @@ const MenuWrapper = styled.div`
     }
   }
 `;
+const Message = styled('div')`
+  &:after {
+    font-size: 16px;
+    max-width: calc(100vw - 150px);
+    transform: ${({ scaling = 1 }) => `translate(-50%, -${scaling < 1 ? (100 / scaling) : 100}%) scale(${1 / scaling})`};
+    position: absolute;
+    left: 50%;
+    text-align: center;
+    content: 'Click on items in the menu on screen to navigate';
+  }
+`;
+
 
 const storeRadioValue = (key, value) => window.localStorage.setItem(key, value);;
 
@@ -79,10 +92,9 @@ const DefaultComponent = (props) =>  {
     }
   }, []);
 
-  console.log(props.active && props.pageName.match(/^\/scenes\/.*/) && props.scenesData && props.scenesData.scenes.length > props.scenesData.perPage);
-
   return props.active && (
     <MenuWrapper className={cx('defaultComponent', props.pageName)}>
+      <Message scaling={props.scale} />
       { Array.isArray(props.options) && props.options.length > 0  &&
         <ul>
           { props.options.map((option) => {
@@ -95,7 +107,13 @@ const DefaultComponent = (props) =>  {
                     <li key={toggleValue}>
                       <input type="radio" value={toggleValue} id={toggleValue} checked={toggleValue === radioValues[option.key]} onChange={() => updateRadioValues(option.key, toggleValue)} />
                       <label htmlFor={toggleValue}>
-                        <Entry {...toggleDomAttrs} style={toggleStyles}>
+                        <Entry
+                          {...toggleDomAttrs}
+                          style={{
+                            ...props.defaultLinkStyle[entryProps.defaultStyleOption || 0],
+                            ...toggleStyles,
+                          }}
+                        >
                             {toggleValue}
                         </Entry>
                       </label>
@@ -106,17 +124,14 @@ const DefaultComponent = (props) =>  {
             }
 
             return (
-              <li key={option.link}>
+              <li key={option.link || option.x + option.y}>
                 <Entry
                   {...domAttrs}
-                  style={styles}
+                  style={{
+                    ...props.defaultLinkStyle[option.defaultStyleOption || 0],
+                    ...styles,
+                  }}
                   href={option.link}
-                  onClick={
-                    generateLink(
-                      option.link,
-                      option.onClick,
-                    )
-                  }
                 />
               </li>
             );
@@ -129,10 +144,12 @@ const DefaultComponent = (props) =>  {
           count={props.scenesData.scenes.length}
           index={props.index}
           styles={props.scenesData.navigation}
+          defaultLinkStyle={props.defaultLinkStyle}
+          title={props.title}
         />
       )}
       { /* back and hidden */}
-      <Helmet title={`Menu -- ${props.pageName}`} />
+      <Helmet title={`DVD: ${props.title} -- ${props.pageName}`} />
       <ScreenSaver />
     </MenuWrapper>
   )

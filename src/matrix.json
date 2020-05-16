@@ -1,0 +1,448 @@
+{
+  "title": "matrix-BETA",
+  "defaultVideo": "/static/video/_matrix280k32k.mp4",
+  "type": "video/mp4",
+  "sourceDir": "",
+  "type": "video/youtube",
+  "defaultVideo": "ix0tlRLbTVw",
+  "sourceDir": "https://youtube.com/embed/",
+  "backupLocalVideo": [
+    "/static/video/_matrix280k32k.mp4",
+    "https://github.com/padraigfl/dvd-menu/blob/master/static/video/_matrix280k32k.mp4?raw=true"
+  ],
+  "defaultLinkStyle": [
+    {
+      "background": "linear-gradient(to right, green 25px, transparent 25px)"
+    },
+    {
+      "background": "rgba(0, 180, 0, 70%)",
+      "borderRadius": "2px"
+    }
+  ],
+  "poster": "/static/matrix.jpg",
+  "scenes": {
+    "NOTES": "Last two pages are so abrupt that they're extremely buggy, I suspect every one of these is tbh",
+    "perPage": 6,
+    "options": [
+      { "links": "/play", "children": "play", "x": 190, "y": 398, "w": 122, "h": 20, "defaultStyleOption": 1 },
+      { "link": "/root", "children": "back", "x": 366, "y": 398, "w": 123, "h": 20, "defaultStyleOption": 1 },
+      { "link": "/root", "children": "back", "x": 540, "y": 398, "w": 120, "h": 20, "defaultStyleOption": 1 }
+
+    ],
+    "scenes": [
+      { "link": null, "children": "1" },
+      { "link": null, "children": "2" },
+      { "link": null, "children": "3" },
+      { "link": null, "children": "4" },
+      { "link": null, "children": "5" },
+      { "link": null, "children": "6" },
+      { "link": null, "children": "7" },
+      { "link": null, "children": "8" },
+      { "link": null, "children": "9" },
+      { "link": null, "children": "10" },
+      { "link": null, "children": "11" },
+      { "link": null, "children": "12" },
+      { "link": null, "children": "13" },
+      { "link": null, "children": "14" },
+      { "link": null, "children": "15" },
+      { "link": null, "children": "16" },
+      { "link": null, "children": "17" },
+      { "link": null, "children": "18" },
+      { "link": null, "children": "19" },
+      { "link": null, "children": "20" },
+      { "link": null, "children": "21" },
+      { "link": null, "children": "22" },
+      { "link": null, "children": "23" },
+      { "link": null, "children": "24" },
+      { "link": null, "children": "25" },
+      { "link": null, "children": "26" },
+      { "link": null, "children": "27" },
+      { "link": null, "children": "28" },
+      { "link": null, "children": "29" },
+      { "link": null, "children": "30" },
+      { "link": null, "children": "31" },
+      { "link": null, "children": "32" },
+      { "link": null, "children": "33" },
+      { "link": null, "children": "34" },
+      { "link": null, "children": "35" },
+      { "link": null, "children": "36" },
+      { "link": null, "children": "37" },
+      { "link": null, "children": "38" }
+    ],
+    "buttons": [
+      { "x": 169, "y": 109, "w": 165, "h": 100, "defaultStyleOption": 1 },
+      { "x": 344, "y": 109, "w": 165, "h": 100, "defaultStyleOption": 1 },
+      { "x": 517, "y": 109, "w": 165, "h": 100, "defaultStyleOption": 1 },
+      { "x": 169, "y": 250, "w": 165, "h": 100, "defaultStyleOption": 1 },
+      { "x": 344, "y": 250, "w": 165, "h": 100, "defaultStyleOption": 1 },
+      { "x": 517, "y": 250, "w": 165, "h": 100, "defaultStyleOption": 1 }
+    ],
+    "navigation": [
+      { "x": 212, "y": 371, "w": 40, "h": 20, "defaultStyleOption": 1 },
+      { "x": 268, "y": 371, "w": 40, "h": 20, "defaultStyleOption": 1 },
+      { "x": 328, "y": 371, "w": 40, "h": 20, "defaultStyleOption": 1 },
+      { "x": 392, "y": 371, "w": 40, "h": 20, "defaultStyleOption": 1 },
+      { "x": 458, "y": 371, "w": 40, "h": 20, "defaultStyleOption": 1 },
+      { "x": 526, "y": 371, "w": 40, "h": 20, "defaultStyleOption": 1 },
+      { "x": 592, "y": 371, "w": 40, "h": 20, "defaultStyleOption": 1 }
+    ],
+    "media": [
+      { "start": 89.5, "length": 0.05 },
+      { "start": 90.25, "length": 0.05 },
+      { "start": 90.9, "length": 0.05 },
+      { "start": 91.5, "length": 0.05 },
+      { "start": 91.9, "length": 0.05 },
+      { "start": 92.4, "length": 0.05 },
+      { "start": 92.61, "length": 0.02 }
+    ]
+  },
+  "pages": {
+    "?": { "start": 0, "length": 7, "redirect": "/root" },
+
+    "launch": { "start": 0, "length": 25, "redirect": "/root" },
+    "root": {
+      "options": [
+        { "link": "/scenes-transition", "children": "Scene Index", "x": 400, "y": 270, "w": 270, "h": 25 },
+        { "link": "/features-transition", "children": "Special Features", "x": 400, "y": 301, "w": 270, "h": 25 },
+        { "link": "/audio-transition", "children": "Audio", "x": 400, "y": 334, "w": 270, "h": 25 },
+        { "link": "/play-transition", "children": "Play", "x": 400, "y": 366, "w": 270, "h": 25 }
+      ],
+      "start": 52,
+      "length": 34
+    },
+    "play-transition": {
+      "redirect": "/root",
+      "start": 87,
+      "length": 2
+    },
+    "play": {
+      "media2": "pM70TROZQsI",
+      "media": "W37DlG1i61s",
+      "redirect": "/root",
+      "controls": true
+    },
+    "scenes-transition": {
+      "redirect": "/scenes/0",
+      "start": 86,
+      "length": 2
+    },
+    "audio-transition": {
+      "redirect": "/audio",
+      "start": 94,
+      "length": 3
+    },
+    "audio": {
+      "start": 97,
+      "length": 0.1,
+      "options": [
+        {
+          "content": "component or label text",
+          "toggle": [
+            { "value": "English", "x": 525, "y": 140, "w": 340, "h": 25 },
+            { "value": "Arabic", "x": 525, "y": 172, "w": 340, "h": 25 },
+            { "value": "Russian Maybe?", "x": 525, "y": 204, "w": 340, "h": 25 },
+            { "value": "Romanian?", "x": 525, "y": 236, "w": 340, "h": 25 },
+            { "value": "English but with sound effects included", "x": 525, "y": 268, "w": 340, "h": 25 },
+            { "value": "None", "x": 525, "y": 333, "w": 340, "h": 25 }
+          ],
+          "key": "audio",
+          "title": "child1"
+        },
+        {
+          "link": "https://www.warnerbros.com/",
+          "children": "main menu",
+          "x": 470, "y": 367, "w": 207, "h": 20, "style": { "background": "linear-gradient(to top, green 4px, transparent 4px)" }
+        },
+        {
+          "link": "/root",
+          "children": "main menu",
+          "x": 278, "y": 400, "w": 120, "h": 20, "defaultStyleOption": 1
+        }
+      ]
+    },
+    "features-transition": {
+      "redirect": "/features",
+      "start": 99.5,
+      "length": 3.5
+    },
+    "features": {
+      "start": 103,
+      "length": 1,
+      "options": [
+        { "link": "/cast-transition", "children": "Cast & Crew", "x": 180, "y": 305, "w": 250, "h": 25  },
+        { "link": "/dream-world-transition", "children": "The Dream World", "x": 180, "y": 346, "w": 250, "h": 25 },
+        {
+          "link": "/root",
+          "children": "Main menu",
+          "x": 208, "y": 400, "w": 120, "h": 20,
+          "defaultStyleOption": 1
+        }
+      ]
+    },
+    "dream-world-transition": {
+      "redirect": "/dream-world",
+      "start": 124.3,
+      "length": 1.5
+    },
+    "dream-world": {
+      "start": 126.26,
+      "length": 0.05,
+      "options": [
+        { "links": "/making-of", "children": "Making the Matrix", "x": 160, "y": 150, "w": 250, "h": 25  },
+        { "links": "/follow-the-white-rabbit", "children": "Follow the White Rabbit, sounds kinda weird and fun", "x": 160, "y": 210, "w": 250, "h": 25 },
+        {
+          "link": "/features",
+          "children": "Main menu",
+          "x": 196, "y": 400, "w": 120, "h": 20,
+          "defaultStyleOption": 1
+        }
+      ]
+    },
+    "cast-transition": { "start": 105, "length": 3, "redirect": "/cast" },
+    "cast": {
+      "start": 108.3,
+      "length": 0.1,
+      "options": [
+        { "link": "/keanu/0", "children": "Keanu", "x": 158, "y": 153, "w": 250, "h": 25 },
+        { "link": "/larry/0", "children": "Larry", "x": 158, "y": 181, "w": 250, "h": 25 },
+        { "link": "/carrie/0", "children": "Carrie", "x": 158, "y": 208, "w": 250, "h": 25 },
+        { "link": "/hugo/0", "children": "Hugo", "x": 158, "y": 235, "w": 250, "h": 25 },
+        { "link": "/ralphcifaretto/0", "children": "Joey Pants", "x": 158, "y": 262, "w": 250, "h": 25 },
+        { "link": "/silver/0", "children": "Joel Silver", "x": 158, "y": 303, "w": 250, "h": 25 },
+        { "links": "/wachowskis/0", "children": "Wachowskis", "x": 158, "y": 333, "w": 250, "h": 25 },
+        { "link": "/features", "children": "features", "x": 190, "y": 400, "w": 120, "h": 20, "defaultStyleOption": 1 }
+      ]
+    },
+    "keanu/0": {
+      "start": 108.9,
+      "length": 0.2,
+      "options": [
+        { "link": "/cast", "children": "cast", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/keanu/1", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "keanu/1": {
+      "start": 109.5,
+      "length": 0.1,
+      "options": [
+        { "link": "/keanu/0", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 467, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/keanu/2", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "keanu/2": {
+      "start": 109.8,
+      "length": 0.1,
+      "options": [
+        { "link": "/keanu/1", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 467, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/keanu/3", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "keanu/3": {
+      "start": 110.3,
+      "length": 0.1,
+      "options": [
+        { "link": "/keanu/2", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 467, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/keanu/4", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "keanu/4": {
+      "start": 110.7,
+      "length": 0.1,
+      "options": [
+        { "link": "/keanu/3", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 467, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/keanu/5", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "keanu/5": {
+      "start": 111.2,
+      "length": 0.1,
+      "options": [
+        { "link": "/keanu/4", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 467, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/keanu/6", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "keanu/6": {
+      "start": 111.7,
+      "length": 0.1,
+      "options": [
+        { "link": "/keanu/5", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 600, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "larry/0": {
+      "start": 112.2,
+      "length": 0.1,
+      "options": [
+        { "link": "/cast", "children": "cast", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/larry/1", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "larry/1": {
+      "start": 112.7,
+      "length": 0.1,
+      "options": [
+        { "link": "/larry/0", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 467, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/larry/2", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "larry/2": {
+      "start": 113.2,
+      "length": 0.1,
+      "options": [
+        { "link": "/larry/1", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 467, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/larry/3", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "larry/3": {
+      "start": 113.6,
+      "length": 0.1,
+      "options": [
+        { "link": "/larry/2", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 467, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/larry/4", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "larry/4": {
+      "start": 114.1,
+      "length": 0.1,
+      "options": [
+        { "link": "/larry/3", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 467, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/larry/5", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "larry/5": {
+      "start": 114.6,
+      "length": 0.1,
+      "options": [
+        { "link": "/larry/4", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 467, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/larry/6", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "larry/6": {
+      "start": 115,
+      "length": 0.1,
+      "options": [
+        { "link": "/larry/4", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 600, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "carrie/0": {
+      "start": 115.5,
+      "length": 0.1,
+      "options": [
+        { "link": "/cast", "children": "cast", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/carrie/1", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "carrie/1": {
+      "start": 116,
+      "length": 0.1,
+      "options": [
+        { "link": "/carrie/0", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 467, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/carrie/2", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "carrie/2": {
+      "start": 116.6,
+      "length": 0.1,
+      "options": [
+        { "link": "/carrie/1", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 467, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/carrie/3", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "carrie/3": {
+      "start": 117,
+      "length": 0.1,
+      "options": [
+        { "link": "/carrie/2", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 600, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "hugo/0": {
+      "start": 117.5,
+      "length": 0.1,
+      "options": [
+        { "link": "/cast", "children": "cast", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/hugo/1", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "hugo/1": {
+      "start": 118,
+      "length": 0.1,
+      "options": [
+        { "link": "/hugo/0", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 467, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/hugo/2", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "hugo/2": {
+      "start": 118.5,
+      "length": 0.1,
+      "options": [
+        { "link": "/hugo/1", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 600, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "ralphcifaretto/0": {
+      "start": 119,
+      "length": 0.1,
+      "options": [
+        { "link": "/cast", "children": "cast", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/ralphcifaretto/1", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "ralphcifaretto/1": {
+      "start": 119.4,
+      "length": 0.1,
+      "options": [
+        { "link": "/ralphcifaretto/0", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 467, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/ralphcifaretto/2", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "ralphcifaretto/2": {
+      "start": 119.9,
+      "length": 0.1,
+      "options": [
+        { "link": "/ralphcifaretto/1", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 467, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/ralphcifaretto/3", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "ralphcifaretto/3": {
+      "start": 120.4,
+      "length": 0.1,
+      "options": [
+        { "link": "/ralphcifaretto/2", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 467, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/ralphcifaretto/4", "children": "continue", "x": 565, "y": 398, "w": 114, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "ralphcifaretto/4": {
+      "start": 120.9,
+      "length": 0.1,
+      "options": [
+        { "link": "/ralphcifaretto/3", "children": "back", "x": 370, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 },
+        { "link": "/cast", "children": "cast", "x": 600, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1}
+      ]
+    },
+    "silver/0": {
+      "start": 121.3,
+      "length": 0.1,
+      "options": [
+        { "link": "/cast", "children": "crew", "x": 172, "y": 398, "w": 80, "h": 20, "defaultStyleOption": 1 }
+      ]
+    }
+  }
+}

@@ -9,6 +9,11 @@ body {
   color: white;
 }
 
+#settings {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
 .promo {
   display: inline-block;
   margin-left: 2px;
@@ -18,14 +23,17 @@ iframe {
   box-shadow: 0px 0px 10px 2px #000;
 }
 
+.fillHeight {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  height: -webkit-fill-available;
+}
+
 #app {
   display: flex;
   flex-direction: column;
   align-content: center;
   /* https://twitter.com/AllThingsSmitty/status/1254151507412496384 */
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  height: -webkit-fill-available;
 }
 
 #wrapper {
@@ -77,4 +85,11 @@ ul {
 .shrek .menuEntry:hover, .shrek .menuEntry:focus {
   opacity: 0.8;
   outline: none;
+}
+
+
+@keyframes insertDisc {
+  0% { transform: translate3d(-50%, -50%, 0) rotate3d(0, 0, 0, 0deg) scale(1); }
+  70% { transform: translate3d(-50%, -150%, 0px) rotate3d(1, 0, 0, 80deg) scale(1); }
+  100% { transform: translate3d(-50%, -200%, 150px) rotate3d(1, 0, 0, 80deg) scale(0.1); }
 }
