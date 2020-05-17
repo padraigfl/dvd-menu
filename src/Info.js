@@ -20,6 +20,14 @@ const InfoWrapper= styled.div`
     box-shadow: inset 0px -2px 0px 0px black;
   }
   a { color: white; font-weight: bold; }
+  .otherThings {
+    .otherThing {
+      display: flex;
+      min-height: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
 `;
 
 const Info = () => (
@@ -57,7 +65,7 @@ const Info = () => (
       </ul>
 
       <h2>Other things I've done</h2>
-      <ul>
+      <ul className="otherThings">
         {[
           { link: 'https://packard-belle.netlify.app/', text: 'Windows98 Clone', github: 'https://github.com/padraigfl/packard-belle' },
           { link: 'https://react-coursebuilder.netlify.app', text: 'Youtube Playlists Note Taker (kinda like the ones you have on Udemy and such)', github: 'https://github.com/padraigfl/videojs-react-course-assistant' },
@@ -65,7 +73,7 @@ const Info = () => (
           { link: 'https://github.com/padraigfl/', text: 'Other random crap' }
         ].map((v, idx, arr) => (
           <li>
-            <div style={ { display: 'flex', height: '24px', alignItems: 'center' }}>
+            <div className="otherThing">
               <a href={v.link} target="_blank">{v.text}</a>
               {v.github && (
                 <a href={v.github} target="_blank"><img src="/static/highlights/github-icon.png" /></a>

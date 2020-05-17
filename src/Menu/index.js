@@ -28,14 +28,18 @@ const MenuWrapper = styled.div`
   }
 `;
 const Message = styled('div')`
+  margin-top: ${({ scaling }) => scaling < 0.5 ? '-50px' : 'initial' };
+
   &:after {
+    display: ${({ scaling }) => scaling < 0.5 ? 'none' : 'block' };
+    width: ${({ scaling } ) => scaling < 1 ? 100 * scaling : 100}%;
     font-size: 16px;
-    max-width: calc(100vw - 150px);
-    transform: ${({ scaling = 1 }) => `translate(-50%, -${scaling < 1 ? (100 / scaling) : 100}%) scale(${1 / scaling})`};
+    transform: ${({ scaling } ) => `translate(50%, -100%) scale(${ scaling < 1 ? 1 / scaling : 1})`};
     position: absolute;
-    left: 50%;
+    right: 50%;
     text-align: center;
     content: 'Click on items in the menu on screen to navigate';
+    padding-bottom: 8px;
   }
 `;
 
