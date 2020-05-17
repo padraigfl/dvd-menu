@@ -17,6 +17,10 @@
     {
       "background": "rgba(0, 180, 0, 70%)",
       "borderRadius": "2px"
+    },
+    {
+      "background-image": "url(/static/highlights/scenematrix.png)",
+      "background-size": "cover"
     }
   ],
   "poster": "/static/matrix.jpg",
@@ -70,12 +74,12 @@
       { "link": null, "children": "38" }
     ],
     "buttons": [
-      { "x": 169, "y": 109, "w": 165, "h": 100, "defaultStyleOption": 1 },
-      { "x": 344, "y": 109, "w": 165, "h": 100, "defaultStyleOption": 1 },
-      { "x": 517, "y": 109, "w": 165, "h": 100, "defaultStyleOption": 1 },
-      { "x": 169, "y": 250, "w": 165, "h": 100, "defaultStyleOption": 1 },
-      { "x": 344, "y": 250, "w": 165, "h": 100, "defaultStyleOption": 1 },
-      { "x": 517, "y": 250, "w": 165, "h": 100, "defaultStyleOption": 1 }
+      { "x": 169, "y": 106, "w": 160, "h": 100, "defaultStyleOption": 2 },
+      { "x": 344, "y": 106, "w": 160, "h": 100, "defaultStyleOption": 2 },
+      { "x": 517, "y": 106, "w": 160, "h": 100, "defaultStyleOption": 2 },
+      { "x": 169, "y": 250, "w": 160, "h": 100, "defaultStyleOption": 2 },
+      { "x": 344, "y": 250, "w": 160, "h": 100, "defaultStyleOption": 2 },
+      { "x": 517, "y": 250, "w": 160, "h": 100, "defaultStyleOption": 2 }
     ],
     "navigation": [
       { "x": 212, "y": 371, "w": 40, "h": 20, "defaultStyleOption": 1 },
