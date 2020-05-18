@@ -14,8 +14,12 @@ const ScreenSaverBody = styled.div`
   overflow: hidden;
   background-color: black;
   z-index: 15;
+  top: 0px;
+  left: 0px;
   img {
     width: 240px;
+    max-width: 30%;
+    max-height: 30%;
   }
 `;
 
@@ -128,7 +132,7 @@ const ScreenSaver = () => {
     } else {
       timer.current = setTimeout(() => {
         setScreenSaver(true);
-      }, 12000);
+      }, props.timer || 15000);
     }
   }, [screenSaver]);
 

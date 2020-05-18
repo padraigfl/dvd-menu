@@ -5,6 +5,7 @@ import { Router, Route, Link } from "@reach/router";
 import DVD from './DVD';
 import Info from "./Info";
 import MainMenu from "./Main";
+import Why from "./Why";
 
 const dvds = [shrekData, matrixData];
 
@@ -57,6 +58,7 @@ class App extends Component {
           ))}
           <Victory path="/victory" />
           <Info path="/info"/>
+          <Why path="/why" />
           <MainMenu discs={dvds} default />
         </Router>
       </>

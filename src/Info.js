@@ -2,23 +2,25 @@ import React from 'react';
 import { styled } from 'linaria/react';
 import { Link } from '@reach/router';
 
-const InfoWrapper= styled.div`
+export const InfoWrapper= styled.div`
   position: relative;
   overflow: auto;
-  background-color: #999;
+  background-color: #777;
   z-index: 10;
   padding: 16px;
   padding-bottom: 20px;
   padding-top: 50px;
   text-shadow: 0px 0px 2px black;
+  display: inline-block;
+  max-width: 800px;
+  display: inline-block;
   img {
     margin-top: -2px;
     margin-bottom: -2px;
     margin-left: 4px;
-    height: 24px;
     filter: brightness(0);
-    box-shadow: inset 0px -2px 0px 0px black;
   }
+  .gitlink { img { height: 24px; } }
   a { color: white; font-weight: bold; }
   .otherThings {
     .otherThing {
@@ -28,11 +30,31 @@ const InfoWrapper= styled.div`
       flex-wrap: wrap;
     }
   }
+  blockquote {
+    position: relative;
+    p {
+      margin-top: 0px;
+      margin-bottom: 8px;
+    }
+    &::before {
+      display: block;
+      content: '“';
+      position: absolute;
+      transform: translateX(-100%);
+      font-style: italic;
+      font-weight: bold;
+    }
+    p:last-child::after {
+      font-style: italic;
+      content: '”';
+      font-weight: bold;
+    }
+  }
 `;
 
 const Info = () => (
   <InfoWrapper>
-  <Link to="/">Home</Link>
+    <Link to="/">Home</Link>
     <div style={{ maxWidth: '800px' }}>
       <h2>What is this?</h2>
       <p>
@@ -42,16 +64,7 @@ const Info = () => (
       </p>
 
       <h2>How DVD Menus Work</h2>
-      <p>
-        I'm probably going to write something about DVD menus around this project at some point. If you've like me to cover something please contact me.
-      </p>
-      <p>A basic summary (to my knowledge) is as follows</p>
-      <ul>
-        <li>DVDs use a single video file for their menus</li>
-        <li>The various menus and transitions are configured to use a portion of this video (e.g. a still background with no audio is likely to be a fraction of a second of video looping)</li>
-        <li>Each individual section contains rules determining the various buttons on the page and where they lead</li>
-        <li>Transitions contain no buttons but a location to go to on video end</li>
-      </ul>
+      <p>Please check <Link to="/why">this page</Link> for more info on that, not sure how coherent it is</p>
 
       <h2>Issues</h2>
       <ul>
@@ -76,7 +89,7 @@ const Info = () => (
             <div className="otherThing">
               <a href={v.link} target="_blank">{v.text}</a>
               {v.github && (
-                <a href={v.github} target="_blank"><img src="/static/highlights/github-icon.png" /></a>
+                <a className="gitlink" href={v.github} target="_blank"><img src="/static/highlights/github-icon.png" /></a>
               )}
             </div>
           </li>
