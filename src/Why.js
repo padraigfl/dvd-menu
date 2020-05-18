@@ -59,7 +59,7 @@ const Why = () => (
         <p>...were they just loads of videos?[<a href="#how-video">*</a>]</p>
         <p>...and how were the buttons styled?[<a href="#how-buttons">*</a>]</p>
         <p>...or how were transitions handled?[<a href="#how-flow">*</a>]</p>
-        <p>...but also, how did those ones with multiple tiny videos playing in a menu work?  What about the static menus with audio in the background?[<a href="#how-media-variants">*</a></p>
+        <p>...but also, how did those ones with multiple tiny videos playing in a menu work?  What about the static menus with audio in the background?[<a href="#how-media-variants">*</a>]</p>
         <p>And what was the deal with those specific versions of the main menu with an intro that would only play once?[<a href="#how-intro">*</a>]</p>
       </blockquote>
     </p>
