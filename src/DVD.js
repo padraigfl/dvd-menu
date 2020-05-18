@@ -94,7 +94,8 @@ class DVD extends Component {
 
   componentDidMount() {
     let iOSNote = 'IOS_WARNING';
-    if (this.ohDearItsIos && !window.localStorage.getItem(iOSNote) && confirm('Warning: There will be video rendering issues on iOS. Please refresh if video fails and double click buttons.')) {
+    if (this.ohDearItsIos && !window.localStorage.getItem(iOSNote)) {
+      console.log('Warning: There will be video rendering issues on iOS. Please refresh if video fails and double click buttons.');
       window.localStorage.setItem(iOSNote, true);
     }
     if (this.state.scale !== 1) {
