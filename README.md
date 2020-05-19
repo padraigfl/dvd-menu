@@ -10,8 +10,6 @@ Previewable at https://dvd-rom.netlify.app/
 - Has a JSON file which outlines all of the actions within the menu and positioning of various links and buttons
 - Capable of including local storage updates for attributes such as subtitles and audio track
 
-Please see the datatypes file for how these bits work
-
 ### What doesn't work?
 
 Absolutely loads, please see the TODO file
