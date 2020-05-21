@@ -122,7 +122,6 @@ class DVD extends Component {
           className={cx('dvd', config.title)}
           style={
             {
-              marginTop: '50px',
               transform: this.state.scale !== 1 ? `scale(${this.state.scale})` : '',
               transformOrigin: 'top left',
             }

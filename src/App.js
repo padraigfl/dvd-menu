@@ -40,7 +40,7 @@ class App extends Component {
           target="_blank"
           style={ {
             position: 'absolute',
-            top: '4px',
+            bottom: '4px',
             left: '4px',
             color: 'white',
             fontSize: '28px',

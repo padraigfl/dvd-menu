@@ -28,8 +28,6 @@ const MenuWrapper = styled.div`
   }
 `;
 const Message = styled('div')`
-  margin-top: ${({ scaling }) => scaling < 0.5 ? '-50px' : 'initial' };
-
   &:after {
     display: ${({ scaling }) => scaling < 0.5 ? 'none' : 'block' };
     width: ${({ scaling } ) => scaling < 1 ? 100 * scaling : 100}%;

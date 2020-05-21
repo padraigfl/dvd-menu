@@ -107,7 +107,7 @@ const removeEvent = (listener) => {
   document.body.removeEventListener('touchstart', listener.current);
 }
 
-const ScreenSaver = () => {
+const ScreenSaver = (props) => {
   const [screenSaver, setScreenSaver] = useState(false);
   const timer = useRef(null);
   const listener = useRef(null);

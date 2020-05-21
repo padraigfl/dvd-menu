@@ -43,7 +43,13 @@ iframe {
   height: 480px;
   background-color: rgba(0,0,0,0.2);
   z-index: 2;
-  margin-top: auto;
+  margin-top: 50px;
+}
+
+@media (max-width: 500px) {
+  #wrapper {
+    margin-top: 2px;
+  }
 }
 
 input[type=radio] {
