@@ -22,6 +22,7 @@ class VideoHandler extends Component {
   pauseTime;
   audio = true;
   attempts = 0;
+  pauseMode;
 
   componentWillUnmount() {
     this.cleanup();
@@ -68,10 +69,12 @@ class VideoHandler extends Component {
       startTime = 0,
       redirect,
     } = playData;
+    this.video.currentTime(startTime);
     this.video.play()
       .then((...args) => {
-        this.video.currentTime(startTime);
-        this.video.play();
+        if (this.pauseMode) {
+          this.video.pause();
+        }
         if (callback) {
           callback(...args);
         }
@@ -97,49 +100,52 @@ class VideoHandler extends Component {
     loadAction,
     controls,
   }) => {
+    // NOTE: will need to update how youtube videos work or strip them out entirely
+    this.pauseMode = (end - start) < 0.5;
     const startPoint = start || 0;
     this.cleanup();
     const onFinish = redirect
       ? () => navigate(redirect, { replace: true })
       : () => {
-        this.video.currentTime(startPoint);
-        this.videoPlay({ startTime: startPoint });
-      }
+          this.video.currentTime(startPoint);
+          this.videoPlay({ startTime: startPoint });
+        }
     this.video.one('play', () => {
-      if (this.pauseListener) {
-        clearInterval(this.pauseListener);
-      }
       this.video.controls(!!controls);
 
-      // if the time set in the promise occurs prematurely and fails
+      // // if the time set in the promise occurs prematurely and fails
       if (Math.abs(this.video.currentTime() - startPoint) > 0.5){
         this.video.currentTime(startPoint);
       }
     });
 
+    if (this.pauseMode && !this.video.paused()) {
+      this.video.currentTime(startPoint);
+      this.video.play().then(this.video.pause);
+    }
+
     this.setOnFinishAction(onFinish);  
 
     if (media) {
       this.setSource(`${this.props.config.sourceDir}${media}`, this.props.config.type);
-      if (this.pauseListener) {
-        clearInterval(this.pauseListener);
-      }
       this.video.controls(true);
-      setTimeout(this.video.play, 2000);
+      if (!this.pauseMode) {
+        setTimeout(() => {
+          this.video.play();
+        }, 2000);
+      }
       return;
     } else {
       this.setSource(this.defaultVidSource);
     }
-    // this.videoPause(startPoint);
-  
+
     const callback = () => {
-      // this.videoPlay();
       this.video.currentTime(startPoint);
       if (loadAction) {
         loadAction(true);
       }
       this.attempts = 0;
-      if (end) {
+      if (end && !this.pauseMode) {
         this.loopListener = setInterval(() => {
           if (this.video.currentTime() >= end) {
             onFinish();
@@ -148,38 +154,15 @@ class VideoHandler extends Component {
       }
     };
 
-
-    if (!redirect) {
-      this.video.one('pause', () => {
-        this.videoPlay({ callback, startTime: start });
-      });
-    };
-
+    this.video.one('pause', () => {
+      this.videoPlay({ callback, startTime: start });
+    });
+  
     this.videoPlay({
       callback,
       startTime: startPoint,
       redirect,
     });
-  }
-
-  // TODO: resolve issues with youtube pausing and interval check
-  /*
-    Currently this option fails as youtube displays some junk while pausing,
-    the setInterval loop hack attempted here is too unreliable and would need to be tidied considerably to be an option
-  */
-  videoPause = (pauseTime) => {
-    if (this.video.currentType() !== 'video/youtube' || !window.chrome) {
-      this.video.pause();
-    }
-    else {
-      this.pauseTime = typeof pauseTime === 'number' ? pauseTime : this.video.currentTime();
-      if (this.pauseListener) {
-        clearInterval(this.pauseListener);
-      }
-      this.pauseListener = setInterval(() => {
-        this.video.currentTime(this.pauseTime);
-      }, 40);
-    }
   }
 
   cleanup = () => {
@@ -197,47 +180,6 @@ class VideoHandler extends Component {
     this.endAction = action;
   }
 
-  // TODO: easier to do this just as a load of single pages
-  // runLaunchVideos = (idx) => {
-  //   this.cleanup();
-  //   const vidData = this.props.launch[idx];
-  //   if (!vidData) {
-  //     if (this.video.src() !== this.defaultVidSource) {
-  //       this.video.src({ src: this.defaultVidSource, type: this.getCorrectType() });
-  //     }
-
-  //     if (window.location.pathname === '/') {
-  //       navigate('/root');
-  //     }
-  //     return;
-  //   }
-
-  //   const newVidSrc = `${this.props.config.sourceDir}${vidData.media}`;
-
-  //   try {
-  //     if (vidData.media && this.video.src() !== newVidSrc) {
-  //       this.video.src({ src: newVidSrc, type: this.props.config.type });
-  //     } else if (!vidData.media && this.video.src() !== this.defaultVidSource) {
-  //       this.video.src({ src: this.defaultVidSource, type: this.getCorrectType() });
-  //     }
-  //     this.video.currentTime(vidData.start || 0);
-  //     const endAction = () => this.runLaunchVideos(idx + 1)
-
-  //     this.videoPlay(() => {
-  //       this.video.on('ended', endAction);
-  //       if (vidData.length) {
-  //         this.loopListener = setInterval(() => {
-  //           if (this.video.currentTime() > ((vidData.start || 0) + vidData.length)) {
-  //             endAction();
-  //           }
-  //         }, 100);
-  //       }
-  //     });
-  //   } catch {
-  //     this.runLaunchVideos(idx + 1);
-  //   }
-  // }
-
   setVideo = (video) => {
     window.vid = video;
     this.video = video;
@@ -252,8 +194,18 @@ class VideoHandler extends Component {
 
   getVideo = () => this.video;
 
+  toggleHD = this.props.config.hq
+    ? () => {
+      this.setSource(
+        this.video.src() === this.defaultVidSource
+          ? `${this.props.config.sourceDir}${this.props.config.hq}`
+          : this.defaultVidSource
+      );
+    }
+    : null;
+
   render() {
-    const { startPageChange, onLoad, getVideo, cleanup, props } = this;
+    const { startPageChange, toggleHD, onLoad, getVideo, cleanup, props } = this;
     return (
       <>
         <Video
@@ -268,7 +220,7 @@ class VideoHandler extends Component {
           playsInline="1" // youtube requires "1"
         />
         {
-          this.props.children({ startPageChange, onLoad, getVideo, clearVideoListeners: cleanup })
+          this.props.children({ startPageChange, onLoad, getVideo, clearVideoListeners: cleanup, toggleHD })
         }
       </>
     );

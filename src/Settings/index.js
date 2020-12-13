@@ -110,6 +110,8 @@ class Settings extends React.Component {
     muted: true,
     pause: false,
     initialized: false,
+    subtitles: '',
+    audio: '',
   }
 
   mute = createRef();
@@ -117,6 +119,8 @@ class Settings extends React.Component {
   noop = createRef();
   dvdview = createRef();
   tvview = createRef();
+  subtitles = createRef();
+  audio = createRef();
 
   componentDidUpdate() {
     if (this.video !== this.props.video) {
@@ -143,6 +147,16 @@ class Settings extends React.Component {
       this.video[key](bool);
     }
   }
+
+  showVal = (key) => () => {
+    this.setState(
+      { [key]: window.localStorage.getItem(key)},
+      () => tempDisplay(this[key], null, 2000),
+    );
+  }
+
+  showSubs = this.showVal('subtitles');
+  showAudio = this.showVal('audio');
 
   muted = (bool) => {
     this.genericSwitch('muted')(bool);
@@ -201,6 +215,8 @@ class Settings extends React.Component {
                 <StatusDisplay ref={this.mute}><img src="/static/icons/mute.png" alt="" /></StatusDisplay>
                 <StatusDisplay ref={this.unmute}><img src="/static/icons/unmute.png" alt="" /></StatusDisplay>
                 <StatusDisplay ref={this.noop} left><span>NO-OP</span></StatusDisplay>
+                <StatusDisplay ref={this.audio} left>Audio: {this.state.audio}</StatusDisplay>
+                <StatusDisplay ref={this.subtitles} left>Subtitles: {this.state.subtitles}</StatusDisplay>
               </div>
             </>
           )}
@@ -212,6 +228,9 @@ class Settings extends React.Component {
           video={this.props.video}
           defaultClick={this.bannedAction}
           title={this.props.title}
+          toggleHD={this.props.toggleHD}
+          showAudio={this.showAudio}
+          showSubs={this.showSubs}
         />
         {this.state.initialized && this.props.children}
         { this.state.static && (

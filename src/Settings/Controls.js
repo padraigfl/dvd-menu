@@ -6,25 +6,25 @@ import { cx, css } from 'linaria';
 
 const Remote = styled('div')`
   z-index: 100;
-  position: absolute;
   bottom: 0px;
   left: 50%;
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
   border-bottom-left-radius: 30%;
   border-bottom-right-radius: 30%;
-  transform: translateX(-50%);
   background-color: #111;
   width: 250px;
-  max-wdith: 20vh;
+  max-width: 60vh;
+  max-height: 100vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding: 20px;
   padding-top: 50px;
-  padding-bottom: 50px;
-  transform: ${ ({ initialized }) => `perspective(1000px) translate3d(0px, ${ initialized ? '50%' : '85%' }, 0px)` };
-  filter: ${ ({ initialized }) => initialized ? `opacity(0.6) grayscale(0.5)` : `opacity(0.2)`};
+  padding-bottom: 150px;
+  transform-origin: bottom center;
+  transform: translateY(50%) scale(0.75);
+  filter: opacity(50%);
   transition: transform ease-in 1s, filter linear 1s;
   box-shadow: 1px 24px 0px -5px #111, 2px 20px 20px #aaa, inset 0px 0px 3px 0px #aaa, inset 0px 0px 0px 2px #111;
 
@@ -38,7 +38,7 @@ const Remote = styled('div')`
 
   &.remote--active {
     height: 480px;
-    transform:  perspective(500px) rotate3d(1,0,-0.3,40deg) translate3d(-110px,-22%,-200px) scale3d(1,1,1);
+    transform: translateY(0%) scale(0.75);
     filter: none;
     > button, > a {
       pointer-events: initial;
@@ -128,9 +128,9 @@ const Controls = (props) => {
     
       ...new Array(9).fill(null).map((_, idx) => ({ text: idx + 1 })),
     
-      { text: 'subs', onClick: subThing },
+      { text: 'subs', onClick: props.showSubs },
       { text: '0' },
-      { text: 'aux', onClick: auxThing },
+      { text: 'aux', onClick: props.showAudio },
     
       { text: '<<' || '\u23ea', icon: 'icons/rw.png' },
       { text: '▶' },
@@ -141,6 +141,7 @@ const Controls = (props) => {
       { text: 'vol+', onClick: () => props.mute(false), icon: 'icons/unmute.png' },
 
       { text: 'Hide', onClick: () => setActive(false) },
+      { text: 'HD', disabled: !props.toggleHD, onClick: props.toggleHD },
       { text: 'Info', href: '/info' },
     ]
   ), [
@@ -148,6 +149,7 @@ const Controls = (props) => {
     props.muted,
     props.title,
     props.toggleTv,
+    props.toggleHD,
   ]);
   
   return ReactDOM.createPortal(

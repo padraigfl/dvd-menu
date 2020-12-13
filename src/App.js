@@ -1,7 +1,7 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import matrixData from "./matrix.json";
 import shrekData from './shrek.json';
-import { Router, Route, Link } from "@reach/router";
+import { Router, Link } from "@reach/router";
 import DVD from './DVD';
 import Info from "./Info";
 import MainMenu from "./Main";
@@ -27,7 +27,7 @@ const Victory = () => (
   }}>
     <div>Congratulations!</div>
     <div>The DVD logo from the screensaver hit the corner!</div>
-    <div>You have won the game!</div>
+    <div>You have won life!</div>
   </div>
 );
 

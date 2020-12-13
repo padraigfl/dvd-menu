@@ -132,7 +132,7 @@ const ScreenSaver = (props) => {
     } else {
       timer.current = setTimeout(() => {
         setScreenSaver(true);
-      }, props.timer || 15000);
+      }, props.timer || 60000);
     }
   }, [screenSaver]);
 

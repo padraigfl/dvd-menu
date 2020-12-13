@@ -1,9 +1,9 @@
 {
   "title": "shrek",
-  "defaultVideo": "V3airyA0Kig",
-  "type": "video/youtube",
-  "sourceDir": "https://youtube.com/embed/",
-  "defaultVideo": "/static/video/_smallMenu.mp4",
+  "defaultVideo_old_yt": "V3airyA0Kig",
+  "type_old_yt": "video/youtube",
+  "sourceDir_old_yt": "https://youtube.com/embed/",
+  "defaultVideo": "/static/video/shrek360k72k7m.mp4",
   "type": "video/mp4",
   "sourceDir": "",
   "backupLocalVideo": [

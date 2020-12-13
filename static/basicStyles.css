@@ -11,8 +11,9 @@ body {
 
 #settings {
   position: fixed;
-  width: 100%;
+  bottom: 0px;
   z-index: 100;
+  right: 10px;
 }
 .promo {
   display: inline-block;

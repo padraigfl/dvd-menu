@@ -2,12 +2,10 @@ import React, {
   useState,
   useEffect,
   useCallback,
-  useMemo,
-  useRef,
 } from 'react';
 import { cx } from 'linaria';
 import { styled } from 'linaria/react';
-import { processOption, generateLink } from './utils';
+import { processOption } from './utils';
 import Entry from './MenuEntry';
 import RangeSelection from './RangeSelection';
 import Helmet from 'react-helmet';
