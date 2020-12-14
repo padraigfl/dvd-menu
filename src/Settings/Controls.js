@@ -5,6 +5,7 @@ import { styled } from 'linaria/react';
 import { cx, css } from 'linaria';
 
 const Remote = styled('div')`
+  pointer-events: all;
   z-index: 100;
   bottom: 0px;
   left: 50%;

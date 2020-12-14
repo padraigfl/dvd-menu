@@ -76,21 +76,25 @@ class DVD extends Component {
     super(props);
     this.ohDearItsIos = /iPhone|iPod|iPad/.test(navigator.platform);
     this.state = {
-      scale: document.getElementById('app').getBoundingClientRect().width < 800 ? getResizeValues({ width: 853, height: 480 }) : 1
+      scale: document.getElementById('app').getBoundingClientRect().width < 800
+        ? getResizeValues({ width: 853, height: 480 }) : 1
     };
   }
 
   ref;
   resizeListener = () => {
-    const style = getResizeValues({ width: 853, height: 480 });
-    if (style.transform) {
+    const scale = getResizeValues({ width: 853, height: 480 });
+
+    if (!scale) {
       return;
     }
-    const change = Math.abs(+style.transform.split(/\(|\)/)[1] - this.state.style.transform.split(/\(|\)/)[1]);
+
+    const change = Math.abs(scale - +this.state.style.transform.split(/\(|\)/)[1]);
     if (change > 0.2) {
       this.setState({ scale })
     }
   }
+
 
   componentDidMount() {
     let iOSNote = 'IOS_WARNING';
@@ -101,6 +105,9 @@ class DVD extends Component {
     if (this.state.scale !== 1) {
       window.addEventListener('resize', this.resizeListener);
       window.addEventListener('orientationchange', this.resizeListener);
+    }
+    if (this.state.scale === 0) {
+      this.resizeListener();
     }
   }
 
@@ -122,7 +129,7 @@ class DVD extends Component {
           className={cx('dvd', config.title)}
           style={
             {
-              transform: this.state.scale !== 1 ? `scale(${this.state.scale})` : '',
+              transform: this.state.scale !== 1 ? `scale(${this.state.scale || 1})` : '',
               transformOrigin: 'top left',
             }
           }
@@ -143,7 +150,7 @@ class DVD extends Component {
                         const Component = buildPageComponent({ ...data, title: config.title, defaultLinkStyle, scenesData: scenes, pageName: `/${link}` });
                         return (
                           <Component
-                            scale={this.state.scale}
+                            scale={this.state.scale || 1}
                             onLoad={onLoad}
                             path={`/${link}`}
                             key={`r${idx}`}
